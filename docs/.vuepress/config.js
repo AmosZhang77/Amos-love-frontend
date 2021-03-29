@@ -83,6 +83,47 @@ module.exports = {
                 sidebarDepth: 3
               }
             ]
+          },
+          {
+            title: 'dom',
+            path: '/js/dom/',
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+              {
+                title: 'input',
+                path: '/js/dom/input/',
+                collapsable: false,
+                sidebarDepth: 3
+              },
+              {
+                title: 'window',
+                path: '/js/dom/window/',
+                collapsable: false,
+                sidebarDepth: 3
+              }
+
+            ]
+          },
+          {
+            title: 'function collection',
+            path: '/js/function_collection/',
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+              {
+                title: 'input',
+                path: '/js/function_collection/input/',
+                collapsable: false,
+                sidebarDepth: 3
+              },
+              {
+                title: 'date',
+                path: '/js/function_collection/date/',
+                collapsable: false,
+                sidebarDepth: 3
+              },
+            ]
           }
         ]
       },

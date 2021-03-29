@@ -1,0 +1,27 @@
+{
+  "name": "amos-love-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pinksun77/Amos-love-frontend.git"
+  },
+  "author": "张君歆",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pinksun77/Amos-love-frontend/issues"
+  },
+  "homepage": "https://github.com/pinksun77/Amos-love-frontend#readme",
+  "devDependencies": {
+    "@vuepress/plugin-active-header-links": "^1.8.2",
+    "@vuepress/plugin-back-to-top": "^1.8.2",
+    "@vuepress/plugin-medium-zoom": "^1.8.2",
+    "vuepress": "^1.8.2"
+  }
+}

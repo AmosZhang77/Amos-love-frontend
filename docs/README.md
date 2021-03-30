@@ -1,16 +1,18 @@
 ---
 home: true
 heroImage: /hero.jpg
-heroText: Hero 标题
-tagline: Hero 副标题
-actionText: 快速上手 →
-actionLink: /zh/guide/
+heroText: Amos love frontend
+tagline: just for love, how long? I don't know...
+actionText: 从html开始
+actionLink: /html/
 features:
-- title: 简洁至上
-  details: 以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。
-- title: Vue驱动
-  details: 享受 Vue + webpack 的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。
-- title: 高性能
-  details: VuePress 为每个页面预渲染生成静态的 HTML，同时在页面被加载的时候，将作为 SPA 运行。
-  footer: MIT Licensed | Copyright © 2018-present Evan You
----
+- title: 个人经验整理
+  details: 个人遇到的问题，并且判断可能有用的会整理进来。有体系文档的这里不会重复整理体系，只会记录自己的一些经验（菜鸡个人维护有多垃圾，你们懂的）。
+- title: 由爱驱动
+  details: 无聊时整理，擅长停更挂机。理论上不答疑。内容有问题，或者有更好的方法，欢迎指教。如果那个人不值得爱，下一个爱的人又何必是一个人。
+- title: 适合人群
+  details: 水平和本文作者差不多差的。欢迎菜鸡互啄，共同进步。
+- title: 价值观（请尽量忽略此条）
+  details: 我要将青春献给人类生存发展的伟大事业。--- I will dedicate my youth  to the great cause of human survival and development.
+  footer: MIT Licensed | Copyright © 2021-present 张君歆 （Amos Zhang）
+   ---

@@ -24,8 +24,8 @@ module.exports = {
     // 导航栏链接
     nav: [
       { text: 'Home', link: '/' },
+      { text: 'Notes', link: '/html/' },
       { text: 'Guide', link: '/guide/' },
-      { text: 'Guide', link: '/guide2/' },
     ],
     sidebar: [
       {
@@ -61,7 +61,22 @@ module.exports = {
                 sidebarDepth: 3
               }
             ]
+          },
+          {
+            title: 'base',
+            path: '/css/base/',
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+              {
+                title: 'em',
+                path: '/css/base/dimensions/',
+                collapsable: false,
+                sidebarDepth: 3
+              }
+            ]
           }
+
         ]
       },
       {
@@ -79,6 +94,18 @@ module.exports = {
               {
                 title: 'date type',
                 path: '/js/base/data_type/',
+                collapsable: false,
+                sidebarDepth: 3
+              },
+              {
+                title: 'object',
+                path: '/js/base/object/',
+                collapsable: false,
+                sidebarDepth: 3
+              },
+              {
+                title: 'coding',
+                path: '/js/base/coding/',
                 collapsable: false,
                 sidebarDepth: 3
               }
@@ -126,6 +153,12 @@ module.exports = {
             ]
           }
         ]
+      },
+      {
+        title: 'MARKDOWN',   // 必要的
+        path: '/markdown/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+        collapsable: false, // 可选的, 默认值是 true,
+        sidebarDepth: 1,    // 可选的, 默认值是 1
       },
       {
         title: 'Group 2',

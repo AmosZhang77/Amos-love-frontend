@@ -104,6 +104,12 @@ module.exports = {
                 sidebarDepth: 3
               },
               {
+                title: 'array',
+                path: '/js/base/array/',
+                collapsable: false,
+                sidebarDepth: 3
+              },
+              {
                 title: 'coding',
                 path: '/js/base/coding/',
                 collapsable: false,

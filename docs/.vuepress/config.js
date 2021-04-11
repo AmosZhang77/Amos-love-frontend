@@ -49,6 +49,20 @@ module.exports = {
         sidebarDepth: 1,
         children: [
           {
+            title: 'base',
+            path: '/css/base/',
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+              {
+                title: 'em',
+                path: '/css/base/dimensions/',
+                collapsable: false,
+                sidebarDepth: 3
+              }
+            ]
+          },
+          {
             title: 'font',
             path: '/css/font/',
             collapsable: false,
@@ -63,14 +77,14 @@ module.exports = {
             ]
           },
           {
-            title: 'base',
-            path: '/css/base/',
+            title: 'less',
+            path: '/css/less',
             collapsable: false,
             sidebarDepth: 2,
             children: [
               {
-                title: 'em',
-                path: '/css/base/dimensions/',
+                title: 'other',
+                path: '/css/less/other/',
                 collapsable: false,
                 sidebarDepth: 3
               }
@@ -167,10 +181,16 @@ module.exports = {
         sidebarDepth: 1,    // 可选的, 默认值是 1
       },
       {
+        title: 'EN',   // 必要的
+        path: '/en/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+        collapsable: false, // 可选的, 默认值是 true,
+        sidebarDepth: 1,    // 可选的, 默认值是 1
+      },
+      {
         title: 'Group 2',
         children: [ /* ... */],
         initialOpenGroupIndex: -1 // 可选的, 默认值是 0
-      }
+      },
     ],
     lastUpdated: 'Last Updated', // string | boolean
   },

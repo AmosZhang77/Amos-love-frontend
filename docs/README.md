@@ -11,8 +11,8 @@ features:
 - title: 由爱驱动
   details: 无聊时整理，擅长停更挂机。理论上不答疑。内容有问题，或者有更好的方法，欢迎指教。如果那个人不值得爱，下一个爱的人又何必是一个人。
 - title: 适合人群
-  details: 水平和本文作者差不多差的。欢迎菜鸡互啄，共同进步。
+  details: 水平和本文作者差不多差的。欢迎菜鸡互啄，共同进步。联系方式： moonyellow@126.com
 - title: 价值观（请尽量忽略此条）
   details: 我要将青春献给人类生存发展的伟大事业。--- I will dedicate my youth  to the great cause of human survival and development.
-  footer: MIT Licensed | Copyright © 2021-present 张君歆 （Amos Zhang）
-   ---
+footer: MIT Licensed | Copyright © 2021-present 张君歆 （Amos Zhang）
+---

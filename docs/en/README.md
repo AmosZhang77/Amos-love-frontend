@@ -31,6 +31,12 @@ v.	简述; 概括; 压缩;
 [词典]	encapsulate的过去分词和过去式;
 keep components encapsulated 保持组件的封装性
 
+
+### dilemma	
+英[dɪˈlemə] 美[dɪˈlemə]
+n.	(进退两难的)窘境，困境;
+[例句]They try to find a way out of their dilemma.
+
 ### awesome	英[ˈɔːsəm]
 美[ˈɔːsəm]
 adj.	令人惊叹的; 使人惊惧的; 很困难的; 难得吓人的; 很好的(或极好玩的等);

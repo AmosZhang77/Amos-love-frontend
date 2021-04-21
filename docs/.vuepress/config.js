@@ -89,8 +89,13 @@ module.exports = {
                 sidebarDepth: 3
               }
             ]
+          },
+          {
+            title: 'css fn',
+            path: '/css/css_fn',
+            collapsable: false,
+            sidebarDepth: 2,
           }
-
         ]
       },
       {
@@ -120,6 +125,18 @@ module.exports = {
               {
                 title: 'array',
                 path: '/js/base/array/',
+                collapsable: false,
+                sidebarDepth: 3
+              },
+              {
+                title: 'base fn',
+                path: '/js/base/base_fn/',
+                collapsable: false,
+                sidebarDepth: 3
+              },
+              {
+                title: 'request',
+                path: '/js/base/request/',
                 collapsable: false,
                 sidebarDepth: 3
               },

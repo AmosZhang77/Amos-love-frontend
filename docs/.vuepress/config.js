@@ -78,7 +78,7 @@ module.exports = {
           },
           {
             title: 'less',
-            path: '/css/less',
+            path: '/css/less/',
             collapsable: false,
             sidebarDepth: 2,
             children: [
@@ -92,7 +92,7 @@ module.exports = {
           },
           {
             title: 'css fn',
-            path: '/css/css_fn',
+            path: '/css/css_fn/',
             collapsable: false,
             sidebarDepth: 2,
           }
@@ -196,6 +196,26 @@ module.exports = {
         path: '/markdown/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
         collapsable: false, // 可选的, 默认值是 true,
         sidebarDepth: 1,    // 可选的, 默认值是 1
+      },
+      {
+        title: 'editor',
+        path: '/editor/',
+        collapsable: false,
+        sidebarDepth: 1,
+        children: [
+          {
+            title: 'webstorm',
+            path: '/editor/webstorm/',
+            collapsable: false,
+            sidebarDepth: 2,
+          },
+          {
+            title: 'vscode',
+            path: '/editor/vscode/',
+            collapsable: false,
+            sidebarDepth: 2,
+          },
+        ]
       },
       {
         title: 'EN',   // 必要的

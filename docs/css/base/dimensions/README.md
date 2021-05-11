@@ -1,5 +1,3 @@
-## base
-
 ### 尺寸
 
 #### max-height

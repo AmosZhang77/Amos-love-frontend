@@ -55,7 +55,7 @@ module.exports = {
             sidebarDepth: 2,
             children: [
               {
-                title: 'em',
+                title: 'dimensions',
                 path: '/css/base/dimensions/',
                 collapsable: false,
                 sidebarDepth: 3
@@ -129,8 +129,8 @@ module.exports = {
                 sidebarDepth: 3
               },
               {
-                title: 'base fn',
-                path: '/js/base/base_fn/',
+                title: 'base api',
+                path: '/js/base/base_api/',
                 collapsable: false,
                 sidebarDepth: 3
               },
@@ -234,6 +234,7 @@ module.exports = {
   plugins: {
     '@vuepress/medium-zoom': {},
     '@vuepress/back-to-top': {},
+    '@vuepress/nprogress': true, // 默认为true，设置为false可以关闭进度条
     '@vuepress/active-header-links': {
       sidebarLinkSelector: '.sidebar-link',
       headerAnchorSelector: '.header-anchor'

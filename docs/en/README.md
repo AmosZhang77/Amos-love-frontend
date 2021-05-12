@@ -69,3 +69,10 @@ adv.	视线受阻地; 仅靠仪表操纵地; 盲目地;
 
 in blind
 盲目的
+
+tutorial
+[tuːˈtɔːriəl]教程
+
+implement[ˈɪmplɪment]使生效; 贯彻; 执行; 实施;
+showcased[ʃəʊkeɪst]使展现; 在玻璃橱窗陈列;
+nonetheless [ˌnʌnðəˈles]尽管如此;

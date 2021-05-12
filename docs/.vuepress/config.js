@@ -55,7 +55,7 @@ module.exports = {
             sidebarDepth: 2,
             children: [
               {
-                title: 'em',
+                title: 'dimensions',
                 path: '/css/base/dimensions/',
                 collapsable: false,
                 sidebarDepth: 3
@@ -78,7 +78,7 @@ module.exports = {
           },
           {
             title: 'less',
-            path: '/css/less',
+            path: '/css/less/',
             collapsable: false,
             sidebarDepth: 2,
             children: [
@@ -92,7 +92,7 @@ module.exports = {
           },
           {
             title: 'css fn',
-            path: '/css/css_fn',
+            path: '/css/css_fn/',
             collapsable: false,
             sidebarDepth: 2,
           }
@@ -135,8 +135,8 @@ module.exports = {
                 sidebarDepth: 3
               },
               {
-                title: 'base fn',
-                path: '/js/base/base_fn/',
+                title: 'base api',
+                path: '/js/base/base_api/',
                 collapsable: false,
                 sidebarDepth: 3
               },
@@ -218,6 +218,26 @@ module.exports = {
         sidebarDepth: 1,    // 可选的, 默认值是 1
       },
       {
+        title: 'editor',
+        path: '/editor/',
+        collapsable: false,
+        sidebarDepth: 1,
+        children: [
+          {
+            title: 'webstorm',
+            path: '/editor/webstorm/',
+            collapsable: false,
+            sidebarDepth: 2,
+          },
+          {
+            title: 'vscode',
+            path: '/editor/vscode/',
+            collapsable: false,
+            sidebarDepth: 2,
+          },
+        ]
+      },
+      {
         title: 'EN',   // 必要的
         path: '/en/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
         collapsable: false, // 可选的, 默认值是 true,
@@ -234,6 +254,7 @@ module.exports = {
   plugins: {
     '@vuepress/medium-zoom': {},
     '@vuepress/back-to-top': {},
+    '@vuepress/nprogress': true, // 默认为true，设置为false可以关闭进度条
     '@vuepress/active-header-links': {
       sidebarLinkSelector: '.sidebar-link',
       headerAnchorSelector: '.header-anchor'

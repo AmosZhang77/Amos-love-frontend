@@ -129,6 +129,12 @@ module.exports = {
                 sidebarDepth: 3
               },
               {
+                title: 'set',
+                path: '/js/base/set/',
+                collapsable: false,
+                sidebarDepth: 3
+              },
+              {
                 title: 'base fn',
                 path: '/js/base/base_fn/',
                 collapsable: false,
@@ -188,6 +194,20 @@ module.exports = {
                 sidebarDepth: 3
               },
             ]
+          }
+        ]
+      },
+      {
+        title: 'third party',   // 必要的
+        path: '/third_party/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+        collapsable: false, // 可选的, 默认值是 true,
+        sidebarDepth: 1,    // 可选的, 默认值是 1
+        children: [
+          {
+            title: 'EChart',   // 必要的
+            path: '/third_party/echart/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+            collapsable: false, // 可选的, 默认值是 true,
+            sidebarDepth: 2   // 可选的, 默认值是 1
           }
         ]
       },

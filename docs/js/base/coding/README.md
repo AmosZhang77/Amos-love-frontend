@@ -18,3 +18,25 @@ const dot = function (contextClass, lineNum, lineHeight, safeNum) {
     safeNum = lineHeight || 30
 }
 ```
+
+###  eslint全局变量忽略检查
+
+#### 全局变量
+
+Eslint 全局变量未定义报错，在用的时候 前面加一个注解就不报错了
+```js
+/* global $ */
+```
+
+#### script标签
+
+Js字符串显示，直接写</script>会提前结束script标签；
+
+```js
+// 编译的时会被正确解析，但eslint会报没有必要转义
+const string = '\<\/script>'
+
+// 用’<’+’/script>’编译的时会被正确解析，eslint也不会报错
+const string = '<' + '/script>'
+```
+

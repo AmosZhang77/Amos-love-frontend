@@ -31,7 +31,6 @@ v.	简述; 概括; 压缩;
 [词典]	encapsulate的过去分词和过去式;
 keep components encapsulated 保持组件的封装性
 
-
 ### dilemma	
 英[dɪˈlemə] 美[dɪˈlemə]
 n.	(进退两难的)窘境，困境;
@@ -58,7 +57,6 @@ square aspect ratio方的方向比例
 v.	是重要部分; 是…的部分; 认为，认定(某事将发生或属实); 计算(数量或成本);
 [词典]	figure的现在分词;
 figuring out 搞清楚 
-
 
 ### blind	
 英[blaɪnd]美[blaɪnd]

@@ -78,7 +78,7 @@ module.exports = {
           },
           {
             title: 'less',
-            path: '/css/less',
+            path: '/css/less/',
             collapsable: false,
             sidebarDepth: 2,
             children: [
@@ -92,7 +92,7 @@ module.exports = {
           },
           {
             title: 'css fn',
-            path: '/css/css_fn',
+            path: '/css/css_fn/',
             collapsable: false,
             sidebarDepth: 2,
           }

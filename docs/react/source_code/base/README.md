@@ -1,0 +1,1 @@
+PureComponent 只有一个生命周期，shouldComponentUpdate

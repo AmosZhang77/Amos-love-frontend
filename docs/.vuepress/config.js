@@ -197,6 +197,49 @@ module.exports = {
           }
         ]
       },
+
+      {
+        title: 'react',
+        path: '/react/',
+        collapsable: false,
+        sidebarDepth: 1,
+        children: [
+          {
+            title: 'base',
+            path: '/react/base/',
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+              {
+                title: 'api',
+                path: '/react/base/api/',
+                collapsable: false,
+                sidebarDepth: 3
+              },
+            ]
+          },
+          {
+            title: 'source code',
+            path: '/react/source_code/',
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+              {
+                title: 'base',
+                path: '/react/source_code/base/',
+                collapsable: false,
+                sidebarDepth: 3
+              },
+              {
+                title: 'useful fn',
+                path: '/react/source_code/useful_fn/',
+                collapsable: false,
+                sidebarDepth: 3
+              }
+            ]
+          },
+        ]
+      },
       {
         title: 'third party',   // 必要的
         path: '/third_party/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在

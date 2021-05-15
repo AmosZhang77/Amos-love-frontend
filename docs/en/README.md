@@ -31,7 +31,6 @@ v.	简述; 概括; 压缩;
 [词典]	encapsulate的过去分词和过去式;
 keep components encapsulated 保持组件的封装性
 
-
 ### dilemma	
 英[dɪˈlemə] 美[dɪˈlemə]
 n.	(进退两难的)窘境，困境;
@@ -59,7 +58,6 @@ v.	是重要部分; 是…的部分; 认为，认定(某事将发生或属实); 
 [词典]	figure的现在分词;
 figuring out 搞清楚 
 
-
 ### blind	
 英[blaɪnd]美[blaɪnd]
 adj.	瞎的; 失明的; 盲人; (对某事)视而不见的，未察觉的;
@@ -69,3 +67,10 @@ adv.	视线受阻地; 仅靠仪表操纵地; 盲目地;
 
 in blind
 盲目的
+
+tutorial
+[tuːˈtɔːriəl]教程
+
+implement[ˈɪmplɪment]使生效; 贯彻; 执行; 实施;
+showcased[ʃəʊkeɪst]使展现; 在玻璃橱窗陈列;
+nonetheless [ˌnʌnðəˈles]尽管如此;

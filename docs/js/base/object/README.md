@@ -123,5 +123,21 @@ for (let value of iterable) {
   value += 1
   console.log(value) // 11 // 21 // 31
 }
+```
 
+### 多属性对象剔除少量属性
+
+巧用解构赋值，剔除可能出现的某些属性，这里剔除了前两个属性，即使前两个属性没有也不用处理，不会报错。
+
+```js
+let { jobGroup, childJobList, ...needContent } = envItemF.sub[envItemF.subShowIndex].content
+envItemT.sub[envItemT.subShowIndex].content = needContent // 如果表格是执行器的情况，执行器和子任务不复制
+```
+
+### 除去对象的null和undefined属性
+
+这里用的 lodash的方法
+
+```js
+pickBy(object, it => !(it == null))
 ```

@@ -14,13 +14,78 @@ let func = new Function('name', str);
 func('Jack') // "Hello Jack!"
 ```
 
-### eval
+### function
 
-eval:
+如果function是整个声明语句的第一个词，就是函数声明，
+否则，function就是函数表达式（表达式结果是个值，不是声明）
+
 
 ```js
-let str = 'let name = `jack`;' + ' console.log( ' + '`Hello ${name}!`' + ')';
-eval(str) // "Hello Jack!"
+function a(){ // function是声明
+  console.log('a')
+}
+a() // a
+
+(function b(){ // function是表达式
+  console.log('b')
+})
+b() // 报错，Uncaught ReferenceError: b is not defined
+```
+
+表达式不会声明变量，表达式结果是个值
+```js
+let c = (function c (){ // function是表达式
+    console.log('c')
+  })
+c() // c
+```
+
+```js
+var c = function c (){ // function是表达式
+    console.log('c')
+  }
+c() // c
+```
+
+```js
+
+let c = (function (){ // function是表达式
+    console.log('c')
+  })
+c() // c
+```
+
+```js
+
+let c = function (){ // function是表达式
+    console.log('c')
+  }
+c() // c
+```
+
+
+### eval
+
+eval: 非严格模式下，用var定义变量，会在词法作用于中插入变量b的声明定义（工作原理），
+从而改变了浏览器编译时的词法作用域。
+（浏览器会通过词法静态分析优化变量和函数。如果eval存在，会动态改变词法作用域，
+浏览器只能选择不做优化避免引起程序逻辑变化。所以会影响性能。）
+
+```js
+const b = 2
+function org(a,str){
+  eval(str)
+  console.log(a,b)
+}
+org(1,'var b = 3') // 1 3
+org(1,'let b = 3') // 1 2
+
+function fn(){
+  const b = Math.random()
+  org(1,`let b = ${b}`) // 1 2
+  org(1,`var b = ${b}`) // 1 0.32133
+}
+fn()
 ```
 
 ### async await

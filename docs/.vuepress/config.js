@@ -5,14 +5,12 @@ module.exports = {
   ],
   port: 8076,
   // cache: false,
-
   // 指定额外的需要被监听的文件。
   // 你可以监听任何想监听的文件，文件变动将会触发 vuepress 重新构建，并实时更新。
   extraWatchFiles: [
     // '.vuepress/config.js', // 使用相对路径
     // '/path/to/bar.js'   // 使用绝对路径
   ],
-
   themeConfig: {
     // 导航栏 Logo
     logo: '/img/logo.jpg',
@@ -28,6 +26,12 @@ module.exports = {
       { text: 'Guide', link: '/guide/' },
     ],
     sidebar: [
+      {
+        title: '给作者一个认可',
+        path: '/sponsor/',
+        collapsable: false,
+        sidebarDepth: 1,
+      },
       {
         title: 'HTML',   // 必要的
         path: '/html/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
@@ -241,24 +245,30 @@ module.exports = {
         ]
       },
       {
-        title: 'third party',   // 必要的
-        path: '/third_party/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-        collapsable: false, // 可选的, 默认值是 true,
-        sidebarDepth: 1,    // 可选的, 默认值是 1
+        title: 'third party',
+        path: '/third_party/',
+        collapsable: false,
+        sidebarDepth: 1,
         children: [
           {
-            title: 'EChart',   // 必要的
-            path: '/third_party/echart/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-            collapsable: false, // 可选的, 默认值是 true,
-            sidebarDepth: 2   // 可选的, 默认值是 1
+            title: 'EChart',
+            path: '/third_party/echart/',
+            collapsable: false,
+            sidebarDepth: 2
+          },
+          {
+            title: 'jquery',
+            path: '/third_party/jquery/',
+            collapsable: false,
+            sidebarDepth: 2
           }
         ]
       },
       {
-        title: 'MARKDOWN',   // 必要的
-        path: '/markdown/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-        collapsable: false, // 可选的, 默认值是 true,
-        sidebarDepth: 1,    // 可选的, 默认值是 1
+        title: 'MARKDOWN',
+        path: '/markdown/',
+        collapsable: false,
+        sidebarDepth: 1,
       },
       {
         title: 'editor',
@@ -281,15 +291,15 @@ module.exports = {
         ]
       },
       {
-        title: 'EN',   // 必要的
-        path: '/en/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-        collapsable: false, // 可选的, 默认值是 true,
-        sidebarDepth: 1,    // 可选的, 默认值是 1
+        title: 'EN',
+        path: '/en/',
+        collapsable: false,
+        sidebarDepth: 1,
       },
       {
         title: 'Group 2',
         children: [ /* ... */],
-        initialOpenGroupIndex: -1 // 可选的, 默认值是 0
+        initialOpenGroupIndex: -1
       },
     ],
     lastUpdated: 'Last Updated', // string | boolean

@@ -18,7 +18,7 @@ isNaN用法很怪，NaN不等于NaN，别用，es5 Number.isNaN可以片段是�
 ```js
 // (自写，经过测试验证)如果输入不符合的数字，强制变回上次符合要求的数字
 const parseFloatNum = function (num, last) { // last 为上次正确输入的值
-  if ((num === undefined || num === null)
+  if ((num === undefined || num === null) // undefined和null不排除会引起toString报错
     || (num < 0 || num.toString().trim() === '')) {
     return ''
   } else {
@@ -26,6 +26,40 @@ const parseFloatNum = function (num, last) { // last 为上次正确输入的值
       return num
     } else {
       return last // 不符合就退回上次的数值
+    }
+  }
+}
+```
+
+转化为整数数字
+```js
+
+const parseIntNum = function (num) { // last 为上次正确输入的值
+  if ((num === undefined || num === null)
+    || (num < 0 || num.toString().trim() === '')) {
+    return ''
+  } else {
+    if (isNaN(num)) {
+      return ''
+    } else {
+      return Math.floor(Number(num))
+    }
+  }
+}
+```
+
+转化为保留两位小数数字
+```js
+
+const parseFix2 = function (num) { // last 为上次正确输入的值
+  if ((num === undefined || num === null)
+    || (num < 0 || num.toString().trim() === '')) {
+    return ''
+  } else {
+    if (isNaN(num)) {
+      return ''
+    } else {
+      return Number(val).toFixed(2)
     }
   }
 }

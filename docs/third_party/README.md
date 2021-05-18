@@ -1,4 +1,7 @@
-第三方优秀资源 地址收集
+## 第三方优秀资源 地址收集
 
-日期时间处理 https://github.com/moment/moment
-项目代码量统计 https://github.com/AlDanial/cloc
+## 日期时间处理 https://github.com/moment/moment
+
+## 项目代码量统计 https://github.com/AlDanial/cloc
+
+### 统计文件夹命令 cloc filename

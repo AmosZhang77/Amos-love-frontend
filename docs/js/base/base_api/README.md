@@ -194,20 +194,19 @@ async function fn2 () {
   return 1
 }
 
-// 编译成类似，async后函数返回非promise包装成promise，promise不用再包装
-function fn2 () {
-  return new Promise(resolve => (1))
+// async函数一定会返回一个promise对象。如果一个async函数的返回值看起来不是promise，那么它将会被隐式地包装在一个promise中。
+async function fn2 () {
+  return new Promise(resolve => resolve(1))
 }
-
-// async函数会内容和结果被包一层Promise，
-// Promise(resolve => {async函数内容和返回被包在这里})，async函数返回即是resolve返回
 ```
 
 #### map
 
-虽然不能让map中的async await使的数组按照数组的顺序去执行异步。
+map参1函数无法直接使用 async await
 
-但可以让map中所有异步都执行（并行同时执行）都完成后，再执行遍历之后的语句（能保证拿到所有异步的结果）
+利用for，for of，reduce自定义map能让map中的async await使的数组按照数组的顺序去执行异步。（参考下面filter，some）
+
+下面是让map中所有异步都执行（并行同时执行）都完成后，再执行遍历之后的语句（能保证拿到所有异步的结果）
 
 ```js
 const res = [1, 2, 3].map(item => item ** 2) // 对数组元素求平方（无async await的普通map）
@@ -220,7 +219,7 @@ console.log(res) // [Promise, Promise, Promise]
 // 直接用得不到想要的结果[1, 4, 9]，得到的是Promise数组
 ```
 
-解决方案：用Promise.all来处理
+解决方案：用Promise.all来处理直接map后的结果
 
 ```js
 const res = await Promise.all([1, 2, 3].map(item => item ** 2))
@@ -255,41 +254,75 @@ console.log(res) // Promise{<fulfilled>: "[object Promise]3"}
 
 reduce的结果是Promise所以最外面还需要一个await得到内容
 
-虽然也无法实现每个reduce按照顺序依次依赖。但是能等到所有都好了再计算，相当于也有Promise.all的效果
-
 ```js
 const res = await ([1, 2, 3].reduce(async (accumulator, item) => (await accumulator) + item, 0))
 console.log(res) // 6
 ```
 
-添加一个延迟函数，看看实际执行顺序
+添加一个延迟函数，看看实际执行顺序。
+
+这里非常有意思， 既可以实现每个迭代中的异步按照顺序依次依赖，最后一个迭代结束，计算出reduce结果。
+也可以实现，每个迭代中异步同时开始，等到所有迭代都好了，再计出reduce结果。类似与Promise.all的效果。
+
+1.每个异步同时开始，等到所有都好了再计算，相当于也有Promise.all的效果
+
+**将要等待的异步操作语句放在await accumulator之前。 reduce内部本身所有迭代会同时执行，放在await accumulator之前的异步语句会同时开始执行。 碰到await
+accumulator会block，因为上一个迭代的promise还在等待状态（即await accumulator还在等待状态）**
+
+下面例子分析：
+
+因为wait1s(1),wait1s(2),wait1s(3)同时执行，所以wait1s分别在6s，4s，2s完成。
+
+因为第2秒时完成的是第三个迭代中的wait1s， 第三个迭代走到await accumulator， 因为第三个accumulator需要前面的accumulator变成完成状态后才能开始，所以block在这里。
+
+第4秒，第二个迭代同之前第三个迭代，也block在accumulator，因为第一个accumulator还是未完成。
+
+第6秒，第一个迭代wait1s结束，走到第一个迭代的accumulator，第一个accumulator是初始值也就是0，不是一个promise，不用等待，直接往下走。
+还是第6秒，第一个迭代的accumulator瞬间走完promise状态变成完成，此时第二个accumulator因为它前面的第一个accumulator的promise完成了，
+它自身没有block，所以也一下子变成了完成状态，一次类推，第三个accumulator也瞬间变成完成状态。reduce所有迭代都走到了最后。 reduce的结果就出来了。
 
 ```js
 const wait1s = async (i) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      console.log('i:', i)
-      resolve(i)
-    }, (3 - i) * 2000)
-  })
+   return new Promise((resolve) => {
+      setTimeout(() => {
+         console.log('i:', i) // 按照延迟时间打印，2秒打印第三个i:2，
+         // 第4秒打印二个i:1，第6秒打印二个i:0
+         resolve(i)
+      }, (3 - i) * 2000)
+   })
 }
 
+let saveArr = []
 const res = await ([1, 2, 3].reduce(async (accumulator, item, i) => {
-  console.log('reduce开始') // 3个reduce会一起瞬间开始，这里开始就连续打印3个
-  let iR = await wait1s(i)
-  let r = (await accumulator) + item
-  console.log('r:', r, 'iR:', iR) // 按照延迟时间打印，2秒打印第三个i:2，
-  // 第4秒打印二个i:1，第6秒打印二个i:0
-  // 这里相当于reduce被block住，所有延迟结束后在计算最后结果
-  return r
+   console.log('reduce开始') // 3个瞬间连续打印
+   console.log('item:', item, 'saveArr:', saveArr[0], saveArr[1], saveArr[2]) // 3个瞬间连续打印，saveArr都是undefined
+
+   saveArr[i] = await wait1s(i) // 同时开始执行3个wait1s，返回promise，延时函数已经开始计时，秒数到之前block下面语句
+   let r = (await accumulator) + item // accumulator是前一个迭代返回的promise，会被前面promise的等待状态block
+   // 只有第一个是默认值，不是promise，不会被block
+   // 前一个迭代的promise(即本次accumulator)状态变成完成后，这句马上继续马上往下走，本身没有其他等待的动作
+   
+   console.log('item:', item, 'saveArr:', saveArr[0], saveArr[1], saveArr[2])
+// 这里相当于reduce被block住，所有延迟结束后在计算最后结果，三个结果一起打印
+   return r
 }, 0))
-// 6秒后，也就是reduce里面的延时都并行走完了，再拿所有等待后结果，计算reduce的最后结果
+// 6秒后，也就是reduce里面的语句都走完了，拿到所有等待后结果，计算reduce的最后结果
 console.log(res) // 6
 ```
 
 打印结果如下：
 
-reduce开始 // 开始立即打印三遍
+reduce开始 // 第0秒打印
+
+item: 1 saveArr: undefined undefined undefined // 第0秒打印
+
+reduce开始 // 第0秒打印
+
+item: 2 saveArr: undefined undefined undefined // 第0秒打印
+
+reduce开始 // 第0秒打印
+
+item: 3 saveArr: undefined undefined undefined // 第0秒打印
 
 i: 2 // 第2秒打印
 
@@ -297,13 +330,91 @@ i: 1 // 第4秒打印
 
 i: 0 // 第6秒打印
 
-r: 1 iR: 0 // 第6秒打印
+item: 1 saveArr: 0 1 2 // 第6秒打印
 
-r: 3 iR: 1 // 第6秒打印
+item: 2 saveArr: 0 1 2 // 第6秒打印
 
-r: 6 iR: 2 // 第6秒打印
+item: 3 saveArr: 0 1 2 // 第6秒打印
 
 6 // 第6秒打印
+
+2.每个异步按照顺序依次依赖执行
+
+***与上面代码唯一的区别就是await wait1s(i)语句和 await accumulator语句交换了顺序***
+
+下面例子分析：
+
+每个迭代accumulator前面的语句，按顺序瞬间一起执行，
+执行到accumulator，除了第一个都被前一个迭代promise的状态是等待block住，
+第一个迭代直接执行到accumulator，进入延时函数，第一个开始延时。
+
+6s后延时结束，wait1s的promise状态变成完成，第一个迭代后面没有异步语句，所以一下子都走完。
+第二个迭代accumulator状态因此瞬间变成完成，第二个wait1s执行，第二个开始延时。
+
+同上， 第10秒，第二个迭代的wait1s的promise状态变成完成，第二个迭代后面没有异步语句，所以一下子都走完。
+第三个迭代accumulator状态因此瞬间变成完成，第三个wait1s执行，第三个开始延时。
+
+同上，第12秒第三个迭代的wait1s的promise状态变成完成，第二个迭代后面语句一下子都走完。
+reduce里的迭代都走完，开始走reduce的最终结果计算
+
+```js
+const wait1s = async (i) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log('i:', i) // 第6秒打印i:0， 第10秒打印i:1，第12秒打印i:2，
+      resolve(i)
+    }, (3 - i) * 2000)
+  })
+}
+
+let saveArr = []
+const res = await ([1, 2, 3].reduce(async (accumulator, item, i) => {
+  console.log('reduce开始') // 3个瞬间连续打印
+   console.log('item:', item, 'saveArr:', saveArr[0], saveArr[1], saveArr[2]) // 3个瞬间连续打印，saveArr都是undefined
+
+   let r = (await accumulator) + item // accumulator是前一个迭代返回的promise，会被前面promise的等待状态block
+   // 只有第一个是默认值，不是promise，不会被block。这里就是第一个，直接走完，accumulator的promise状态变成成功
+   // 第二个以及之后的await accumulator也已经走到，也会立刻建立promise，但因为之前的迭代返回promise状态没有完成，promise状态保持等待，block在这里
+   
+   saveArr[i] = await wait1s(i) // 第一个wait1s因为第一个accumulator直接成功，这里也可以直接开始，延时函数开始计时。当第一个延时6秒结束
+   // 第二个accumulator（即第一个迭代返回值的promise）才完成，走到第二个wait1s，第二个延时函数开始
+   
+   console.log('item:', item, 'saveArr:', saveArr[0], saveArr[1], saveArr[2]) 
+  // 这里6s，10s，12s打印
+  return r
+}, 0))
+// 第12秒，最后一个迭代的语句也走完了，计算reduce的最后结果
+console.log(res) // 6
+```
+
+打印结果如下：
+
+reduce开始 // 第0秒打印
+
+item: 1 saveArr: undefined undefined undefined // 第0秒打印
+
+reduce开始 // 第0秒打印
+
+item: 2 saveArr: undefined undefined undefined // 第0秒打印
+
+reduce开始 // 第0秒打印
+
+item: 3 saveArr: undefined undefined undefined // 第0秒打印
+
+
+i: 0 // 第6秒打印
+
+item: 1 saveArr: 0 undefined undefined // 第6秒打印
+
+i: 1 // 第10秒打印
+
+item: 2 saveArr: 0 1 undefined // 第10秒打印
+
+i: 2 // 第12秒打印
+
+item: 3 saveArr: 0 1 2 // 第12秒打印
+
+6 // 第12秒打印
 
 #### filter
 
@@ -375,9 +486,9 @@ item: 1 iR: 0 // 6秒打印
 
 #### 解决方案1：自己重写一个方法，用map 和 Promise.all来处理拿到结果，最后再用filter处理。（添加一个延迟函数，看看实际执行顺序）
 
-方案一最终效果，迭代之间没有先后顺序，一起开始执行，都执行完了往下走。
+方案一效果，迭代之间没有先后顺序，一起开始执行，都执行完了Promise.all拿到结果。
 
-原生map参数1-函数中的await不能使迭代之间等待
+原生map参数1-函数中的await不能使迭代之间有等待的效果
 
 ```js
 const wait1s = async (i) => {
@@ -401,6 +512,7 @@ let res = await [1, 2, 3].filterSync(async (item, i) => {
   console.log('filter开始，item:', item) // 3个filter会一起瞬间开始，这里开始就连续打印3个
   let iR = await wait1s(i)
   console.log('item % 2 !== 0:', item % 2 !== 0, 'iR:', iR) // 按照延迟时间打印，2秒打印第三个i:2，
+   // 第4秒打印二个i:1，第6秒打印二个i:0
   return item % 2 !== 0
 })
 console.log(res)
@@ -428,7 +540,7 @@ item % 2 !== 0: true iR: 0 // 第6秒打印
 
 [1, 3] // 第6秒打印
 
-#### 解决方案2：自己重写一个方法，用reduce来处理。非异步情况，相当于方案 map + filter
+#### 解决方案2：自己重写一个方法，用for或for of 或 reduce来处理。迭代之间会相互等待，最后一个结果也拿到之后，所有结果filter一下
 
 方案二最终效果：迭代之间有先后顺序，后面的迭代会等前面的迭代中异步完成之后才执行
 
@@ -446,6 +558,7 @@ const wait1s = async (i) => {
     }, (3 - i) * 2000)
   })
 }
+let saveArr = []
 
 Array.prototype.filterSync = async function (callback, thisArg) {
   // thisArd： 原生filterh第二个可选参数
@@ -454,12 +567,18 @@ Array.prototype.filterSync = async function (callback, thisArg) {
 
   // reduce和filter,forEach,map不同，不能支持传入this
   const res = await (this.reduce(async (accumulator, item, index) => {
+    
     let r = await accumulator // accumulator是上次async函数的返回
-    if (await callback(this[index], index, this)) {r.push(item)}
-    return r
+     console.log('item:', item, 'saveArr:', saveArr[0], saveArr[1], saveArr[2])
+
+     if (await callback(this[index], index, this)) {r.push(item)} // 这里很重要，这里是callback里面的wait1s，在accumulator后面，所以和reduce里面第二种解决方案执行结果一样
+    
+     return r
   }, []))
 
-  /*  const res = await (this.reduce(async (accumulator, item, index) => { // 这样写和上面一样效果
+  /*  const res = await (this.reduce(async (accumulator, item, index) => { // await accumulator后面没用变量r代替，这样写和上面一样效果， 
+      //同一个promise结果是相同的，不会因为用的是变量还是原来的await表现的不同
+      
       let r = await accumulator // accumulator是上次async函数的返回
       if (await callback(this[index], index)) {(await accumulator).push(item)}
       return (await accumulator)
@@ -468,15 +587,15 @@ Array.prototype.filterSync = async function (callback, thisArg) {
   return res
 }
 
-let saveArr = []
 let res = await [1, 2, 3].filterSync(async (item, i, arr) => {
   console.log('filter开始，item:', item) // 3个不会一起瞬间开始，
   saveArr[i] = await wait1s(i)
-  // 第二个会等第一个迭代的异步完成才执行，能拿到第一个的异步结果，可以通过saveArr的内容发现
+  // 第二个wait1s会等第一个迭代的异步完成才执行，能拿到第一个的异步结果，可以通过saveArr的内容发现
   console.log('item % 2 !== 0:', item % 2 !== 0, 'saveArr:', saveArr[0], saveArr[1], saveArr[2])
   return item % 2 !== 0
 })
 console.log(res) // [1, 3]
+
 ```
 
 打印结果如下：
@@ -549,6 +668,7 @@ let res = await [1, 2, 3].someSync(async (item, i) => {
   console.log('some开始，item:', item) // 3个some会一起瞬间开始，这里开始就连续打印3个
   let iR = await wait1s(i)
   console.log('item === 4:', item === 4) // 按照延迟时间打印，2秒打印第三个i:2，
+   // 第4秒打印二个i:1，第6秒打印二个i:0
   return item === 4
 })
 console.log(res)
@@ -600,9 +720,11 @@ Array.prototype.someSync = async function (callback, thisArg) {
 
   // reduce和filter,forEach,map不同，不能支持传入this
   const res = await (this.reduce(async (accumulator, item, index) => {
+    
     let r = await accumulator // accumulator是上次async函数的返回
-    if (await callback(this[index], index, this)) {r = true}
-    return r
+    if (await callback(this[index], index, this)) {r = true} // 这里很重要，这里是callback里面的wait1s，在accumulator后面，所以和reduce里面第二种解决方案执行结果一样
+
+     return r
   }, false))
   return res
 }
@@ -640,7 +762,7 @@ item === 4: false saveArr: 0 1 2 // 第12秒打印
 
 false // 第12秒打印
 
-#### 解决方案3：自己重写一个方法，用for of来处理。
+#### 解决方案3：自己重写一个方法，用for或for of来处理。
 
 方案三最终效果：迭代之间有先后顺序，后面的迭代会等前面的迭代中异步完成之后才执行，与some方案二一样，但是可以中途停止。
 
@@ -788,7 +910,7 @@ item: 1 saveArr: 0 1 2 // 第4秒打印
 
 #### 自定义forEach 用于async await
 
-处理方案一，编写一个自定义forEach函数，并添加一个延迟函数，看看实际执行顺序。
+处理方案一，利用for或for of编写一个自定义forEach函数，并添加一个延迟函数，看看实际执行顺序。
 
 可以实现每次迭代之间的等待。即：i:0第6秒出结果，i:1第10秒出结果，i:0第12秒出结果，最后整体给一个返回值
 
@@ -911,6 +1033,17 @@ arr: 2 4 6 saveArr: 0 1 2 // 第6秒打印，最后一句最后打印，for前�
 6. ***可以用于改写自定义map，some，every，forEach,用于支持async await， 改写成迭代之间会等待-迭代顺序运行，后面迭代可以依赖前面迭代异步结果!!!filter逻辑上要所有数据过滤出来结果，
    一般不适合迭代之间先后依赖和打断操作***
 
+***直接使用，需要有所改动（具体见上面reduce）***
+
+1. ***迭代本身有返回值***
+2. ***每次迭代返回值都会因为是async函数被包一层promise，用之前需要用await解开***
+2. ***最后的返回值也会因为是async函数被包一层promise，所以最后结果也要用await解开***
+3. ***可以实现和for，for of一样的迭代之间有依赖，一次执行的效果。异步等待写在accumulator(即上一次迭代返回的promise)后面，通过accumulator来block异步操作的开始。***
+4. ***也可以实现异步一起执行，异步都完成后Promise.all一起处理的效果。异步等待写在accumulator(即上一次迭代返回的promise)前面，因为reduce所有迭代本身都会一起开始执行。***
+5. ***相较与for，for of，reduce迭代无法中断，无法做条件判断中断的性能优化***
+6. ***可以用于改写自定义map，some，every，forEach的两种方式改写。***
+7. ***filter逻辑上要所有数据过滤出来结果， 一般不适合迭代之间先后依赖和打断操作，所有不会用reduce改写***
+
 ***forEach：***
 
 ***直接使用不会报错，但是无法按照理想中的需求执行，无法直接使用***
@@ -918,13 +1051,13 @@ arr: 2 4 6 saveArr: 0 1 2 // 第6秒打印，最后一句最后打印，for前�
 1. ***迭代本身没有返回值***
 2. ***前面即使加await，整个循环下面的语句不会等待***
 3. ***迭代一起开始，相互无依赖，无顺序，所有迭代异步完成后也没有回调***
-4. ***自定义forEach，方案1：用for,for of,reduce可以实现迭代顺序执行，相互等待， 最后一个迭代完成后（或者中途跳出后），再运行迭代后面语句一起处理；
-   方案2：用map,forEach等将promise推到数组中，Promise.all可以实现迭代同时并行执行， 结果都得到之后，再运行迭代后面语句一起处理***
+4. ***自定义forEach，方案1：用for,for of,reduce可以实现迭代顺序执行，相互等待， 最后一个迭代完成后（或者中途跳出后），再运行迭代后面语句一起处理（如过用reduce，见reduce方案1，注意关键语句先后顺序）；
+   方案2：用map,forEach等将promise推到数组中，Promise.all可以实现迭代同时并行执行， 结果都得到之后，再运行迭代后面语句一起处理。也可用reduce实现，见reduce方案1，注意关键语句先后顺序***
 
 ***map filter some every：***
 
 ***因为参1函数返回必定是Promise，直接运行逻辑上肯定是错误的，所以无法直接使用***
 
-1. ***可以自定义函数实现需要的功能，方案1：用for,for of,reduce可以实现迭代顺序执行，相互等待， 最后一个迭代完成后（或者中途跳出后），再运行迭代后面语句一起处理；
-   方案2：用map,forEach等将promise推到数组中，Promise.all可以实现迭代同时并行执行， 结果都得到之后，再运行迭代后面语句一起处理***
+1. ***可以自定义函数实现需要的功能，方案1：用for,for of,reduce可以实现迭代顺序执行，相互等待， 最后一个迭代完成后（或者中途跳出后），再运行迭代后面语句一起处理（如过用reduce，见reduce方案1，注意关键语句先后顺序）；
+   方案2：用map,forEach等将promise推到数组中，Promise.all可以实现迭代同时并行执行， 结果都得到之后，再运行迭代后面语句一起处理。也可用reduce实现，见reduce方案1，注意关键语句先后顺序***
 2. ***filter一般直接用Promise.all方案改写，原因见for第6条***

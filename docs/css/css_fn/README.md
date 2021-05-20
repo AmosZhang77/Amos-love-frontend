@@ -59,15 +59,15 @@ css 一些功能的实现
 
 ```css
 .closeTable {
-    transition: max-height 500ms ease-out;
-    overflow: hidden;
-    max-height: 0;
+  transition: max-height 500ms ease-out;
+  overflow: hidden;
+  max-height: 0;
 }
 
 .openTable {
-    transition: max-height 500ms ease-in;
-    overflow: hidden;
-    max-height: 1000px
+  transition: max-height 500ms ease-in;
+  overflow: hidden;
+  max-height: 1000px
 }
 ```
 
@@ -75,112 +75,116 @@ css 一些功能的实现
 
 ```css
 .disableMouse {
-    pointer-events: none;
+  pointer-events: none;
 }
 ```
 
-### 光圈
+### 光圈动画 逼格光环
+
+<img src="./light_ring.gif" width = "548" height = "422" align=center />
 
 ```html
-<!-- <span></span>-->
-<!-- <span></span>-->
-<!-- <span></span>-->
-<!-- <span></span>-->
 
+<div className='lightRing'>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
 ```
 
-```scss
-overflow: hidden
+```less
+.lightRing .lightRing {
+  @boxWidth: 400px; // 容器宽度
+  @boxHeight: 300px; // 容器高度
+  @lightColorMain: rgba(0, 255, 0, 1); // 光圈主颜色
+  @lightColorSub: rgba(0, 0, 0, 0); // 光圈副颜色，一般就用默认的
+  @lightWidth: 4px; // 光圈宽度
+  @lightTime: 0.6s; // 光圈过一条边的时间
+  @lightBorderRadius: @lightWidth/2; // 光圈倒角
 
-;
-& > span {
-  position: absolute;
-  display: block;
-  z-index: 99999;
-}
+  background-color: #555;
+  overflow: hidden;
+  width: @boxWidth;
+  height: @boxHeight;
+  position: relative;
+  margin: 50px;
+  border: none;
 
-
-
-@light: #ffffff;
-& > span:nth-child(1) {
-  @keyframes span1 {
-    0% {
-      left: -3800px;
-    }
-    100% {
-      left: 3800px;
-    }
-  }
-  height: 5px;
-  width: 3800px;
-  top: 0px;
-  left: -200px;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0), @light);
-  border-top-right-radius: 1px;
-  border-bottom-right-radius: 1px;
-  animation: span1 2s linear infinite;
-  animation-delay: 1s;
-}
-
-& > span:nth-child(2) {
-  @keyframes span2 {
-    0% {
-      top: -320px;
-    }
-    100% {
-      top: 320px;
-    }
-  }
-  height: 320px;
-  width: 5px;
-  top: -320px;
-  right: 0px;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), @light);
-  border-bottom-left-radius: 1px;
-  border-bottom-right-radius: 1px;
-  animation: span2 2s linear infinite;
-  animation-delay: 2s;
-}
-
-& > span:nth-child(3) {
-  @keyframes span3 {
-    0% {
-      right: -3800px;
-    }
-    100% {
-      right: 3800px;
-    }
+  & > span {
+    position: absolute;
+    display: block;
+    z-index: 9999;
+    border-radius: @lightBorderRadius;
   }
 
-  height: 5px;
-  width: 3800px;
-  right: -3800px;
-  bottom: 0px;
-  background: linear-gradient(to left, rgba(0, 0, 0, 0), @light);
-  border-top-left-radius: 1px;
-  border-bottom-left-radius: 1px;
-  animation: span3 2s linear infinite;
-  animation-delay: 3s;
-}
-
-& > span:nth-child(4) {
-  @keyframes span4 {
-    0% {
-      bottom: -320px;
+  & > span:nth-child(1) {
+    @keyframes span1 {
+      0% {
+        left: -@boxWidth;
+      }
+      100% {
+        left: @boxWidth;
+      }
     }
-    100% {
-      bottom: 320px;
-    }
+    height: @lightWidth;
+    width: @boxWidth;
+    top: 0;
+    background: linear-gradient(to right, @lightColorSub, @lightColorMain);
+    animation: span1 2*@lightTime linear infinite;
+    animation-delay: 0s;
   }
-  height: 320px;
-  width: 5px;
-  bottom: -320px;
-  left: 0px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0), @light);
-  border-top-right-radius: 1px;
-  border-top-left-radius: 1px;
-  animation: span4 2s linear infinite;
-  animation-delay: 4s;
-}
 
+  & > span:nth-child(2) {
+    @keyframes span2 {
+      0% {
+        top: -@boxHeight;
+      }
+      100% {
+        top: @boxHeight;
+      }
+    }
+    height: @boxHeight;
+    width: @lightWidth;
+    right: 0;
+    background: linear-gradient(to bottom, @lightColorSub, @lightColorMain);
+    animation: span2 2*@lightTime linear infinite;
+    animation-delay: @lightTime;
+  }
+
+  & > span:nth-child(3) {
+    @keyframes span3 {
+      0% {
+        left: @boxWidth;
+      }
+      100% {
+        left: -@boxWidth;
+      }
+    }
+
+    height: @lightWidth;
+    width: @boxWidth;
+    bottom: 0;
+    background: linear-gradient(to left, @lightColorSub, @lightColorMain);
+    animation: span3 2*@lightTime linear infinite;
+    animation-delay: 0s;
+  }
+
+  & > span:nth-child(4) {
+    @keyframes span4 {
+      0% {
+        bottom: -@boxHeight;
+      }
+      100% {
+        bottom: @boxHeight;
+      }
+    }
+    height: @boxHeight;
+    width: @lightWidth;
+    left: 0;
+    background: linear-gradient(to top, @lightColorSub, @lightColorMain);
+    animation: span4 2*@lightTime linear infinite;
+    animation-delay: @lightTime;
+  }
+}
 ```

@@ -1,5 +1,5 @@
 module.exports = {
-  base:'/index2/', // 在作为子网站的时候需要设置，所有路由都回家前缀地址。非子网站不用设置，对build生效，dev不生效
+  // base:'/index2/', // 在作为子网站的时候需要设置，所有路由都回家前缀地址。非子网站不用设置，对build生效，dev不生效
   title: 'amos-love-frontend',
   head: [
     ['link', { rel: 'icon', href: '/img/logo.jpg' }]

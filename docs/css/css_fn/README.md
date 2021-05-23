@@ -188,3 +188,23 @@ css 一些功能的实现
   }
 }
 ```
+
+### 阻止选中 阻止变蓝 阻止选中图片
+
+1.css3方法
+
+```css
+.className::selection {
+  background-color: transparent; /*css3方法，设置选中效果，不让图片被选中后产生蓝色阴影*/
+}
+```
+
+2.浏览器对应方法
+
+```css
+.className {
+  user-select: none; /*阻止用户选中*/
+}
+```
+
+

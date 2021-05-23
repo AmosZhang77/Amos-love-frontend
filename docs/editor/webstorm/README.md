@@ -1,3 +1,9 @@
+### 常用快捷键
+
+多列光标同时输入：alt+鼠标左键键点击选择
+
+删除光标后面内容：空格+del
+
 ### 函数参数类型提示
 
 如果误关闭了，可以这样打开 settings -> editor -> Inlay Hints -> javaScript -> Type annotations

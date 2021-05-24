@@ -73,6 +73,57 @@ var c = function () { // function是表达式，表达式方式声明函数，�
 c() // c
 ```
 
+### 函数声明提升优先
+
+函数声明整体首先会被提升，然后才是普通变量声明的提升（普通变量只是声明提升，赋值及其他逻辑均留在原处）
+
+```js
+foo() // 1
+var foo
+function foo(){
+  console.log(1)
+}
+foo = function () {
+   console.log(2)
+}
+```
+
+引擎理解成如下形式：
+
+```js
+function foo(){
+   console.log(1)
+}
+
+var foo // 尽管普通变量声明提升在后面，但是普通变量声明只有声明被提升，赋值在原地，
+// 然后重复声明并没有把前面值覆盖，而是忽略了重复声明。
+
+foo() // 1
+foo = function () {
+   console.log(2)
+}
+```
+
+### 函数声明
+
+尽可能避免把函数声明放在判断条件中，因为js未来版本中解析规则可能会发生变化
+(当chrome前版本84，已经将function解析在内部了，无法提升，打印Uncaught TypeError: foo is not a function)
+
+```js
+foo() // b // 84版chrome打印Uncaught TypeError: foo is not a function
+var a = true
+if(a){
+  function foo(){console.log('a')}
+   foo() // a
+} else {
+  function foo(){console.log('b')}
+}
+{
+   function foo(){console.log('c')}
+}
+(function foo(){console.log('c')}) // Uncaught TypeError: foo is not a function
+```
+
 ### eval
 
 eval: 非严格模式下，用var定义变量，会在词法作用于中插入变量b的声明定义（工作原理）， 从而改变了浏览器编译时的词法作用域。 （浏览器会通过词法静态分析优化变量和函数。如果eval存在，会动态改变词法作用域，

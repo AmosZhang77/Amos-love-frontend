@@ -128,3 +128,18 @@ function apiJqueryVersion (params, success, before, after) {
   })
 }
 ```
+
+### jq对象与js对象转换
+
+jq转js：取第一个元素
+
+```js
+$("body")[0]
+$("body").get(0)
+```
+
+js转jq: 直接$()方法包裹
+
+```js
+$(elBody)
+```

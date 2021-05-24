@@ -1,30 +1,35 @@
 ## js原生api
 
+### localhost
+
+127.0.0.1 等同于 localhost
+
 ### switch
 
 条件是 === 比较
 
 ```js
 // 其中case是全等才走
+let str
 switch (level) {
-  case "a": // 不写break穿透合并，即a 会执行后面A的语句
-    ;
-  case "A":
-    str = "您的成绩是85-100之间；";
-    break;
-  case "b":
-    ;
-  case "B":
-    str = "您的成绩是60-84之间；";
-    break;
-  case "d":
-    ;
-  case "D":
-    str = "您挂科了";
-    break;
-  default:
-    str = "数据错误";
-    break;
+   case 'a': // 不写break穿透合并，即a 会执行后面A的语句
+
+   case 'A':
+      str = '您的成绩是85-100之间'
+      break
+   case 'b':
+
+   case 'B':
+      str = '您的成绩是60-84之间'
+      break
+   case 'c':
+
+   case 'C':
+      str = '您挂科了'
+      break
+   default:
+      str = '数据错误'
+      break
 }
 ```
 

@@ -1,5 +1,25 @@
 ## 对象
 
+### delete 删除对象属性
+
+用于删除属性。原型链上的属性无法删除。
+
+```js
+let obj = {name: 'Jack'}
+delete obj.name
+console.log(obj.name) // undefined
+```
+
+```js
+let obj = {name: 'Jack'}
+let Fn = function (){}
+Fn.prototype = obj
+let fnp = new Fn()
+console.log(fnp.name) // Jack
+delete fnp.name
+console.log(fnp.name) // Jack // 原型链上的属性无法删除
+```
+
 ### 对象合并
 
 #### Object.assign 方法

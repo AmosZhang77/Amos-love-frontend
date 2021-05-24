@@ -37,3 +37,11 @@ p内容后
 <div>&lt;</div>
 <div>&gt;</div>
 ```
+
+### 限制输入内容长度
+
+maxlength
+
+```html
+<input type='text' maxlength='10'/>
+```

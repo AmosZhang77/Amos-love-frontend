@@ -81,10 +81,9 @@ css 一些功能的实现
 
 ### 光圈动画 逼格光环
 
-<img src="./light_ring.gif" width = "548" height = "422" align=center />
+<css-lightRing/>
 
 ```html
-
 <div className='lightRing'>
     <span></span>
     <span></span>

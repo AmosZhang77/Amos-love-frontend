@@ -1,5 +1,70 @@
 ## js原生api
 
+### localStorage sessionStorage cookie 对比
+
+|     对比        | localStorage    | sessionStorage  | cookie |
+| :-------------: | :-------------: | :-----: | :-----: |
+|  **失效**    | 关浏览器不会丢失 | 关闭浏览器窗口数据销毁 | 关浏览器不会丢失，可设置过期时间 |
+|  **大小**      | 5MB      |   5MB |4KB |
+|  **共享**  | 同域名共享数据，浏览器不同窗口实时同步共享 | 新建立的页面不会共享session数据，同一浏览器已经开的相同的2个页面之间也不会共享。</br>通过当前页面跳转的会共享数据|同域名共享数据，浏览器不同窗口实时同步共享 |
+|  **请求** | 请求不会自动附上     |    请求不会自动附上| 请求会自动附上， 因此会浪费一部分带宽 |
+
+### localStorage
+
+基本方法：
+
+1. 存储：localStorage.setItem(key,value)
+
+通过键名写入键值，如果key存在时，更新value
+
+2. 获取：localStorage.getItem(key)
+
+通过键名获得键值，如果key不存在返回null
+
+3. 删除：localStorage.removeItem(key)
+
+通过键名删除键值对，一旦删除，键名和值将会全部删除
+
+4. 全部清除：localStorage.clear()
+
+清除所有localStorage对象保存的数据
+
+5. 遍历localStorage存储的key
+
+数据总数：localStorage.length
+
+localStorage.key(index) 获取key
+
+6. 不能直接保存对象，存储JSON格式数据或对象需要转字符串
+
+JSON.stringify(data) 将一个对象转换成数据串
+
+JSON.parse(data) 将数据解析成对象
+
+7. 遍历
+
+迭代，localStorage（sessionStorage）是一个对象，它包含存储的内容键值对，最后还有一个length:长度，
+用自身循环方法key迭代时，不会迭代出长度属性。
+
+```js
+for (let i = 0; i <= localStorage.length; i++) {
+   let key = localStorage.key(i) //遍历键值，这里设计的方法比较特别，
+   // 相当于序号，键名，键值3个内容互相绑定。 这里通过序号遍历键名
+   
+   console.info(localStorage.key(i), localStorage.getItem(key)) // key  val
+}
+```
+
+无法用for of迭代
+
+```js
+for (key of localStorage){ // localStorage is not iterable 
+  // localStorage和sessionStorage无法枚举
+   
+  console.log('key:',key,'localStorage[key]',localStorage[key])
+}
+```
+
 ### localhost
 
 127.0.0.1 等同于 localhost
@@ -882,7 +947,7 @@ item === 4: false saveArr: 0 1 2 // 第12秒打印
 
 false // 第12秒打印
 
-### every
+#### every
 
 every 与 some一样无法直接用async await
 

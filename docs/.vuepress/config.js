@@ -36,13 +36,13 @@ module.exports = {
       {
         title: 'HTML',   // 必要的
         path: '/html/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-        collapsable: false, // 可选的, 默认值是 true,
+        collapsable: true, // 可选的, 默认值是 true,
         sidebarDepth: 1,    // 可选的, 默认值是 1
         children: [
           {
             title: 'HTML1',   // 必要的
             path: '/html/html1/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-            collapsable: false, // 可选的, 默认值是 true,
+            collapsable: true, // 可选的, 默认值是 true,
             sidebarDepth: 2   // 可选的, 默认值是 1
           }
         ]
@@ -56,13 +56,13 @@ module.exports = {
           {
             title: 'base',
             path: '/css/base/',
-            collapsable: false,
+            collapsable: true,
             sidebarDepth: 2,
             children: [
               {
                 title: 'dimensions',
                 path: '/css/base/dimensions/',
-                collapsable: false,
+                collapsable: true,
                 sidebarDepth: 3
               }
             ]
@@ -70,13 +70,13 @@ module.exports = {
           {
             title: 'font',
             path: '/css/font/',
-            collapsable: false,
+            collapsable: true,
             sidebarDepth: 2,
             children: [
               {
                 title: 'em',
                 path: '/css/font/em/',
-                collapsable: false,
+                collapsable: true,
                 sidebarDepth: 3
               }
             ]
@@ -84,13 +84,13 @@ module.exports = {
           {
             title: 'less',
             path: '/css/less/',
-            collapsable: false,
+            collapsable: true,
             sidebarDepth: 2,
             children: [
               {
                 title: 'other',
                 path: '/css/less/other/',
-                collapsable: false,
+                collapsable: true,
                 sidebarDepth: 3
               }
             ]
@@ -98,7 +98,7 @@ module.exports = {
           {
             title: 'css fn',
             path: '/css/css_fn/',
-            collapsable: false,
+            collapsable: true,
             sidebarDepth: 2,
           }
         ]
@@ -176,6 +176,12 @@ module.exports = {
                 path: '/js/dom/window/',
                 collapsable: false,
                 sidebarDepth: 3
+              },
+              {
+                title: 'video',
+                path: '/js/dom/video/',
+                collapsable: false,
+                sidebarDepth: 3
               }
 
             ]
@@ -212,13 +218,13 @@ module.exports = {
           {
             title: 'base',
             path: '/react/base/',
-            collapsable: false,
+            collapsable: true,
             sidebarDepth: 2,
             children: [
               {
                 title: 'api',
                 path: '/react/base/api/',
-                collapsable: false,
+                collapsable: true,
                 sidebarDepth: 3
               },
             ]
@@ -226,23 +232,43 @@ module.exports = {
           {
             title: 'source code',
             path: '/react/source_code/',
-            collapsable: false,
+            collapsable: true,
             sidebarDepth: 2,
             children: [
               {
                 title: 'base',
                 path: '/react/source_code/base/',
-                collapsable: false,
+                collapsable: true,
                 sidebarDepth: 3
               },
               {
                 title: 'useful fn',
                 path: '/react/source_code/useful_fn/',
-                collapsable: false,
+                collapsable: true,
                 sidebarDepth: 3
               }
             ]
           },
+        ]
+      },
+      {
+        title: 'engineering',
+        path: '/engineering/',
+        collapsable: false,
+        sidebarDepth: 1,
+        children: [
+          {
+            title: 'npm',
+            path: '/engineering/npm/',
+            collapsable: true,
+            sidebarDepth: 2
+          },
+          {
+            title: 'webpack',
+            path: '/engineering/webpack/',
+            collapsable: true,
+            sidebarDepth: 2
+          }
         ]
       },
       {
@@ -254,13 +280,13 @@ module.exports = {
           {
             title: 'EChart',
             path: '/third_party/echart/',
-            collapsable: false,
+            collapsable: true,
             sidebarDepth: 2
           },
           {
             title: 'jquery',
             path: '/third_party/jquery/',
-            collapsable: false,
+            collapsable: true,
             sidebarDepth: 2
           }
         ]
@@ -280,13 +306,13 @@ module.exports = {
           {
             title: 'webstorm',
             path: '/editor/webstorm/',
-            collapsable: false,
+            collapsable: true,
             sidebarDepth: 2,
           },
           {
             title: 'vscode',
             path: '/editor/vscode/',
-            collapsable: false,
+            collapsable: true,
             sidebarDepth: 2,
           },
         ]

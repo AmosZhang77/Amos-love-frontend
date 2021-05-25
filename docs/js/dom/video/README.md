@@ -93,12 +93,20 @@ video.ontimeupdate = function() {
 }
 ```
 
+### audio标签
 
-111audio111timeupdate111播放位置改变时间
+```html
+<audio class="audio" src="music/hai.mp3" controls width='200px' height='80px'></audio>
 
-audio.currentTime 当前播放的时间点，毫秒数
-timeupdate播放位置改变事件
+```
 
-audio.ontimeupdate = function(){
+```js
+let audio = document.querySelector('.audio')
+// timeupdate音频播放时间位置变化事件，播放的时候会不断地激活（同video）
+audio.ontimeupdate = function () {
+  let currentPlayTime = video.currentTime // 当前播放的时间点，秒数（同video）
+  // audio.duration视频总长，单位为秒（同video）
+  let playedPercent = video.currentTime / video.duration 
+}
+```
 
-<audio id="audio" src="music/hai.mp3" controls width='200px' height='80px'></audio>

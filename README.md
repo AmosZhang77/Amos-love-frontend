@@ -6,7 +6,7 @@
 
 https://raw.githubusercontent.com/pinksun77/Amos-love-frontend/main/docs/.vuepress/public/video/brothers.mp4
 
-<video src="./docs/.vuepress/public/video/brothers.mp4"></video>
+<video src="/pinksun77/Amos-love-frontend/main/docs/.vuepress/public/video/brothers.mp4"></video>
 
 - title: 个人经验整理
   details: 个人遇到的问题，并且判断可能有用的会整理进来。有体系文档的这里不会重复整理体系，只会记录自己的一些经验（菜鸡个人维护有多垃圾，你们懂的）。

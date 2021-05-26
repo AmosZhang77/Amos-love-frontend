@@ -32,6 +32,7 @@ div:nth-child(1) {
 ### @mixin
 
 @minin 声明样式块，样式块能接受参数，
+
 ```scss
 @mixin transform($params) { // 括号里面的是接受参数
   -webkit-transform: $params;
@@ -41,8 +42,8 @@ div:nth-child(1) {
 }
 
 @mixin size($width:100px,$height:24px) { // 如未接受到参数，使用默认参数，默认参数写法
-  width:$width;
-  height:$height;
+  width: $width;
+  height: $height;
 }
 
 div {
@@ -57,9 +58,10 @@ div {
   -webkit-box-shadow: $shadows;
   box-shadow: $shadows;
 }
+
 .shadows {
   // 一堆参数可以一起传进去。空格也可以，类似字符串
-  @include box-shadow(0px 4px 5px #666, 2px 6px 10px #999); 
+  @include box-shadow(0px 4px 5px #666, 2px 6px 10px #999);
 }
 ```
 
@@ -80,7 +82,7 @@ div {
 
 ```html
 <template>
-  <div class=''>
+  <div class='outBox'>
     <h1>h1-20px-blue</h1>
     <div>div-16px-blue</div>
   </div>
@@ -115,6 +117,14 @@ div {
 
 <css-scssBase2/>
 
+```html
+<template>
+  <div class="outBox">
+    <div class="move"></div>
+  </div>
+</template>
+```
+
 ```scss
 @mixin keyframes($name) {
   @keyframes #{$name} {
@@ -143,7 +153,7 @@ div {
 // 引用@mixin样式块普通的写法是@include keyframes(demo),mixin内的name替换成demo字符串
 // 如果用于@content就在@include keyframes(demo)后面加一个花括号。花括号内容传到@content位置
 
-.outBox{
+.outBox {
   padding: 20px;
   height: 100px;
   position: relative;
@@ -164,7 +174,9 @@ div {
 
 @at-root
 
-用来跳出选择器嵌套。默认所有的嵌套，继承所有上级选择器，用这个就可以跳出所有上级选择器的嵌套。 可能用于在写结构化css时，减少内层元素的权重和过深的嵌套
+用来跳出选择器嵌套。默认所有的嵌套，继承所有上级选择器，用这个就可以跳出所有上级选择器的嵌套。
+
+可能用于在写结构化css时，减少内层元素的权重和过深的嵌套
 
 没有跳出语句的情况：
 

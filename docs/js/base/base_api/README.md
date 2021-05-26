@@ -1,5 +1,64 @@
 ## js原生api
 
+### Math对象
+
+```js
+Math.round(3.6) //4 四舍五入
+
+Math.random() //var x = Math.random() 产生一个0-1的小数，包含0，不包含1
+
+Math.max(num1, num2) //返回交大数
+
+Math.min(num1, num2) //返回交小数
+
+Math.abs(num) //绝对值
+
+Math.ceil() //向上取整
+
+Math.floor() //向下取整
+
+Math.pow(x, y) //x的y次方
+
+Math.sqrt(num) //开平方
+```
+
+### Date
+
+```js
+let date = new Date() // 新建时间对象的方法。不设定参数时，为计算机当时的时间。
+
+let date1 = new Date(2006,2,8,12,15,35) // 参数形式 ：YYYY,M,D,H,M,S
+
+let date2 = new Date(2003,2,8) // 年月日
+
+let date3 = new Date(2325545454) // 毫秒数
+
+// 获取/设置年月日
+
+date.getFullYear()
+date.setFullYear(2014)
+
+date.getMonth()
+date.setMonth(8) // 值从0-11，0指1月
+
+date.getDate()
+date.setDate(29)
+
+date.getDay() // 得到星期，星期无法写入，值0-6，0是星期天
+
+date.getHours()
+date.setHours() // 值0-23
+
+date.getMinutes()
+date.setMinutes() // 值0-59
+
+date.getSeconds()
+date.setSeconds() // 值0-59
+
+date.getTime()
+date.setTime() // 单位：毫秒数
+```
+
 ### localStorage sessionStorage cookie 对比
 
 |     对比        | localStorage    | sessionStorage  | cookie |

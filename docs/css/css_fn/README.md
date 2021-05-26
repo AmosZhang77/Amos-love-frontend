@@ -1,6 +1,56 @@
-css 一些功能的实现
 
 ## 一些功能的css实现
+
+### 背景范围
+
+background-clip
+
+```css
+.demo:nth-child(1) {
+    background-clip: border-box; /*背景平铺到边框,但是左上角默认第一张背景设置从边框内部开始,想要从边框上开始设置background-position:负值*/
+    /*background-position: -10px -10px;*/
+}
+
+.demo:nth-child(2) {
+    background-clip: padding-box; /*背景平铺到边框内*/
+}
+
+.demo:nth-child(3) {
+    background-clip: content-box; /*背景平铺到padding内*/
+}
+```
+
+### 背景图平铺方式
+
+```css
+    .backgroundSize2 {
+      background-size: 100% 100%; // 填满，比例会失调
+      background-repeat: no-repeat;
+    }
+
+    .backgroundSize3 {
+      background-size: cover; // 填满，比例会保证。 尺寸不对剪裁图，不留空白
+      background-repeat: no-repeat;
+
+    }
+
+    .backgroundSize4 {
+      background-color: red;
+      background-size: contain; //填满，比例会保证， 尺寸不对，不剪裁图，空白留给背景色发挥。
+      background-repeat: no-repeat;
+    }
+```
+
+
+### 清除浮动
+
+```css
+.clearFix:after{
+    content: "";
+    display: block;
+    clear: both;
+}
+```
 
 ### 设定宽度，要求高度根据宽度变化，并保持一定的宽高比
 

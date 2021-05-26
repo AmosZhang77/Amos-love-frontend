@@ -82,6 +82,26 @@ module.exports = {
             ]
           },
           {
+            title: 'sass',
+            path: '/css/sass/',
+            collapsable: true,
+            sidebarDepth: 2,
+            children: [
+              {
+                title: 'base',
+                path: '/css/sass/base/',
+                collapsable: true,
+                sidebarDepth: 3
+              },
+              {
+                title: 'other',
+                path: '/css/sass/other/',
+                collapsable: true,
+                sidebarDepth: 3
+              }
+            ]
+          },
+          {
             title: 'less',
             path: '/css/less/',
             collapsable: true,

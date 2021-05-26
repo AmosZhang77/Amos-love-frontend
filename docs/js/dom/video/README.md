@@ -2,8 +2,11 @@
 
 <js-video/>
 
+
 poster： 预览图
+
 controls：是否要底部控制栏
+
 ```html
 <video src="/video/laugh.mp4" controls width='400px'
        poster='img/logo.jpg'>设置标签宽度就可以，如果都设置控制条会掉

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class='videoBox'>
-            <video ref="video1" src="/video/brothers.mp4" controls width='640px' height="363px"
+            <video ref="video1" src="/video/brothers.mp4" controls width='640px' height="363px">
 <!--      <video ref="video1" src="/video/laugh.mp4" controls @timeupdate="timeupdate" width='480px' height="270px"-->
              poster='/img/logo.jpg'>设置标签宽度就可以，如果都设置控制条会掉
       </video>
@@ -32,11 +32,11 @@ export default {
   },
   mounted () {
     // 屏幕最大化操作不能裸奔运行，必须放在一个用户的操作上(事件)
-    // 下面语句均无效
-    this.requestFullScreen()
-    setTimeout((requestFullScreen)=>{
-      this.requestFullScreen()
-    },1000)
+    // 下面语句均无效  Failed to execute 'requestFullscreen' on 'Element': API can only be initiated by a user gesture.
+    // this.requestFullScreen()
+    // setTimeout((requestFullScreen)=>{
+    //   this.requestFullScreen()
+    // },1000)
   },
   beforeDestroy () {
 

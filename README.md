@@ -4,6 +4,8 @@
 
 #### actionText: 从html开始
 
+https://raw.githubusercontent.com/pinksun77/Amos-love-frontend/main/docs/.vuepress/public/video/brothers.mp4
+
 <video src="./docs/.vuepress/public/video/brothers.mp4"></video>
 
 - title: 个人经验整理

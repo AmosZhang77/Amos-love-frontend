@@ -21,3 +21,21 @@ background支持多张背景图，逗号隔开
   url("./3.jpg") no-repeat 600px 0;
 }
 ```
+
+### 选择器
+
+正则选择器
+
+```css
+div[id*="demo"] { /*id包含demo的div，注意，demo要加引号*/
+  font-size: 30px;
+}
+
+div[herf^="http"] { /* herf以http开头的div*/
+  color: red;
+}
+
+div[herf$=".pdf"] { /* herf属性以.pdf结尾的div*/
+  color: blue;
+}
+```

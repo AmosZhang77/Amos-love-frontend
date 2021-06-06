@@ -116,6 +116,12 @@ module.exports = {
             ]
           },
           {
+            title: 'css module',
+            path: '/css/module/',
+            collapsable: true,
+            sidebarDepth: 2,
+          },
+          {
             title: 'css fn',
             path: '/css/css_fn/',
             collapsable: true,
@@ -247,10 +253,36 @@ module.exports = {
                 collapsable: true,
                 sidebarDepth: 3
               },
+              {
+                title: 'api',
+                path: '/react/base/fn/',
+                collapsable: true,
+                sidebarDepth: 3
+              },
             ]
           },
           {
             title: 'source code',
+            path: '/react/source_code/',
+            collapsable: true,
+            sidebarDepth: 2,
+            children: [
+              {
+                title: 'base',
+                path: '/react/source_code/base/',
+                collapsable: true,
+                sidebarDepth: 3
+              },
+              {
+                title: 'useful fn',
+                path: '/react/source_code/useful_fn/',
+                collapsable: true,
+                sidebarDepth: 3
+              }
+            ]
+          },
+          {
+            title: 'third party',
             path: '/react/source_code/',
             collapsable: true,
             sidebarDepth: 2,
@@ -314,6 +346,12 @@ module.exports = {
       {
         title: 'MARKDOWN',
         path: '/markdown/',
+        collapsable: false,
+        sidebarDepth: 1,
+      },
+      {
+        title: 'linux',
+        path: '/linux/',
         collapsable: false,
         sidebarDepth: 1,
       },

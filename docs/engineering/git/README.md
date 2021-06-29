@@ -50,6 +50,15 @@ git rebase --continue
 
 ### 修改项目的用户名邮箱
 
+命令方式：
+
+```shell
+git config --global user.name "AmosZhang"
+git config --global user.email "moonyellow@126.com"
+```
+
+直接修改文件方式：
+
 打开项目文件夹，进入隐藏文件夹git，编辑config文件。（这样能改变以后提交的用户名和邮箱，改之前的看上面）
 
 ```text

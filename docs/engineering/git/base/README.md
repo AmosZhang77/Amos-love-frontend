@@ -1,5 +1,13 @@
 ### git基础
 
+### 三棵树
+
+三棵树：工作目录、暂存区、仓库
+
+<img src="./images/trees.png" width="593" height="330">
+
+git文件有三种状态： 已修改（modified），已暂存（staged），已提交（committed)
+
 ### add commit 本质
 
 #### add 本质：
@@ -10,13 +18,13 @@
 
 将index树文件复制到head树.
 
-<img src="./reset_workflow.png" width="800" height="441">
+<img src="./images/reset_workflow.png" width="800" height="441">
 
 #### reset 本质(不带路径：非文件级别，commit级别的)：
 
 reset --soft [commit]
 
-<img src="./reset_soft.png" width="800" height="702">
+<img src="./images/reset_soft.png" width="800" height="702">
 
 将head和当前分支的指向移动到某个commit（从IDE看，同时移动head和分支名标签）
 
@@ -31,14 +39,14 @@ reset --soft [commit]
 可以为这个丢弃的commit新建分支: git branch \<new-branch-name\> [commit]，建完之后IED上会多一个新分支的标签，
 但此时[detached HEAD e7fb264]，head在某个commit上，不是在某个分支，IDE的head标签和分支指针标签之间有个感叹号。
 
-<img src="./checkout_ver.jpg" width="649" height="120"/>
+<img src="./images/checkout_ver.jpg" width="649" height="120"/>
 
 head指向某个commit，新分支也指向这个commit，但是head和新分支没有连起来，无法push。
 
 ***checkout 分支名可以将head和分支标签中间的感叹号去掉*** ，
 即将head和分支指针绑在一起，然后可以正常push了。（其实这种情况，在IDE中右击分支，选checkout之后，也会给到分支名和commit编号两个选项）
 
-<img src="./checkout_choose.jpg" height="68" width="669"/>
+<img src="./images/checkout_choose.jpg" height="68" width="669"/>
 
 如果不用checkout 分支名，不连接，用git push origin \<new-branch-name\> 也能提交到新分支，
 但是IDE的head标签和分支指针标签之间感叹号还在，之后的开发，commit之后head会前进，分支指向不会前进，
@@ -50,7 +58,7 @@ head指向某个commit，新分支也指向这个commit，但是head和新分支
 
 只能用git push origin HEAD:新分支名强行push到远端，而且之后的commit也都要这样push，新分支指针都不会跟上来，并且head和远端分支之间也有感叹号。
 
-<img src="./push_origin_HEAD.jpg" width="791" height="55"/>
+<img src="./images/push_origin_HEAD.jpg" width="791" height="55"/>
 
 所以，还是要用checkout+分支名（而不是+commit号）把head链接分支指向，之间的感叹号会消失。head和分支指向绑定了，之后可以正常push了。
 
@@ -122,7 +130,7 @@ master 和 HEAD标签都会退到倒数第二个commit，origin/master还在最�
 
 所以，虽然在这两种情况下我们都移动 HEAD 使其指向了提交 A，但 做法 是非常不同的。 reset 会移动 HEAD 分支的指向，而 checkout 则移动 HEAD 自身。
 
-<img src="./reset_checkout.png" width="800" height="605">
+<img src="./images/reset_checkout.png" width="800" height="605">
 
 原文： https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E7%BD%AE%E6%8F%AD%E5%AF%86
 
@@ -149,4 +157,4 @@ master 和 HEAD标签都会退到倒数第二个commit，origin/master还在最�
 | **checkout [commit] \<paths\>**        | NO  |   YES | YES | NO |
 
 
-<img src="./reset_workflow.png" width="800" height="441">
+<img src="./images/reset_workflow.png" width="800" height="441">

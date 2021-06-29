@@ -34,6 +34,12 @@ module.exports = {
         sidebarDepth: 1,
       },
       {
+        title: '导读',
+        path: '/guide/',
+        collapsable: false,
+        sidebarDepth: 1,
+      },
+      {
         title: 'HTML',   // 必要的
         path: '/html/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
         collapsable: true, // 可选的, 默认值是 true,
@@ -117,7 +123,7 @@ module.exports = {
           },
           {
             title: 'css module',
-            path: '/css/module/',
+            path: '/css/css_module/',
             collapsable: true,
             sidebarDepth: 2,
           },
@@ -320,7 +326,21 @@ module.exports = {
             path: '/engineering/webpack/',
             collapsable: true,
             sidebarDepth: 2
-          }
+          },
+          {
+            title: 'git',
+            path: '/engineering/git/',
+            collapsable: true,
+            sidebarDepth: 2,
+            children: [
+              {
+                title: 'git base',
+                path: '/engineering/git/base/',
+                collapsable: true,
+                sidebarDepth: 3,
+              }
+            ],
+          },
         ]
       },
       {
@@ -354,6 +374,14 @@ module.exports = {
         path: '/linux/',
         collapsable: false,
         sidebarDepth: 1,
+        children: [
+          {
+            title: 'linux base',
+            path: '/linux/base/',
+            collapsable: true,
+            sidebarDepth: 2
+          }
+        ]
       },
       {
         title: 'editor',
@@ -381,11 +409,7 @@ module.exports = {
         collapsable: false,
         sidebarDepth: 1,
       },
-      {
-        title: 'Group 2',
-        children: [ /* ... */],
-        initialOpenGroupIndex: -1
-      },
+
     ],
     lastUpdated: 'Last Updated', // string | boolean
   },

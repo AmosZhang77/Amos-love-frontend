@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class='videoBox'>
-            <video ref="video1" src="/video/brothers.mp4" controls width='640px' height="363px">
-<!--      <video ref="video1" src="/video/laugh.mp4" controls @timeupdate="timeupdate" width='480px' height="270px"-->
-             poster='/img/logo.jpg'>设置标签宽度就可以，如果都设置控制条会掉
+      <video ref="video1" src="/video/brothers.mp4" controls width='640px' height="363px">
+        <!--      <video ref="video1" src="/video/laugh.mp4" controls @timeupdate="timeupdate" width='480px' height="270px"-->
+        poster='/img/logo.jpg'>设置标签宽度就可以，如果都设置控制条会掉
       </video>
     </div>
     <div class="btnBar">
@@ -104,14 +104,12 @@ export default {
       } else if (video.webkitRequestFullScreen) {
         video.webkitRequestFullScreen() //兼容火狐
       }
-
     },
   }
 }
 </script>
 <style scoped lang="scss">
 .videoBox {
-  // width: 960px;
-  // height: 544px;
+  ｐadding: 20px;
 }
 </style>

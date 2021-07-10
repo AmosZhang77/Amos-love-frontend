@@ -39,3 +39,7 @@ div[herf$=".pdf"] { /* herf属性以.pdf结尾的div*/
   color: blue;
 }
 ```
+
+### z-index
+
+有时候发现A元素提高z-index无论怎么往大设置都覆盖不了z-index低的B元素，因为A元素有一个父元素的z-index比较低，需要增加父元素的z-index

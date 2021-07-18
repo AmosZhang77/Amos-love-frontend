@@ -62,6 +62,12 @@ head指向某个commit，新分支也指向这个commit，但是head和新分支
 
 所以，还是要用checkout+分支名（而不是+commit号）把head链接分支指向，之间的感叹号会消失。head和分支指向绑定了，之后可以正常push了。
 
+
+git reset HEAD --soft 撤销commit
+git reset HEAD  撤销commit（仓库）和add（暂存区）
+git reset HEAD  --hard 撤销commit（仓库）和add（暂存区）和工作目录
+
+
 ### 解决冲突
 
 当当前要push的版本在远端版本之前时，会提示先pull。
@@ -176,3 +182,10 @@ git stash pop：将git stash栈中最后一个版本取出来，同时删掉这�
 git stash apply stash@{0}：可以指定栈中的一个版本，但是不删除被取出的stash
 
 git stash drop：删除stash
+
+
+### git mv a.js b.js 改文件名
+
+直接在操作系统中改文件名，git会当作是删掉一个文件在增加一个新闻界。原文件的git无法延续。使用git命令改文件名可以解决这个问题。
+
+webstorm中右击文件选择rename也可以IDE会帮你git mv

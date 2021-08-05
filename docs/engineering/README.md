@@ -125,6 +125,7 @@ import { addFn as add } from './es6Module.js';
 console.log('foo1', foo1) // 1 // 这个foo1可以打印（右查询可以）
 console.log('foo2', foo2) // 1 
 
+// import生成的foo1 是只读引用
 // foo1 = 3 // 想要赋值的时候会报错（左查询报错）。模块外部使用导出的变量时，不允许左查询，相当于无法直接修改导出变量 // ReferenceError: foo1 is not defined
 
 // let foo1 = 3 // 会报已经定义过foo1的错，import已经把这个变量占了。 // Identifier 'foo1' has already been declared
@@ -132,6 +133,10 @@ console.log('foo2', foo2) // 1
 obj1.val = 2 // 可以直接修改模块中抛出变量的属性
 add() // 可以在模块外面，调用模块导出的方法修改模块导出的变量，直接修改变量是不行的
 console.log('foo1', foo1) // 2
+
+/**
+ * 同一个脚本加载多次，或者不同的脚本加载这个模块，得到的都是同一个实例。所以模块中的变量是同一套
+ */
 console.log('foo2', foo2) // 2 两次引入会共享同一模块中的变量
 console.log('obj1.val', obj1.val) // 2
 ```
@@ -187,3 +192,7 @@ getModule().then(getModule2()) // 第一次引入，异步完成后再次引入�
 浏览器控制台打印出的原生esModule： ***（注意看Symbol(Symbol.toStringTag)属性和__esModule属性）***
 
 <img src="./img.png" height="293" width="911"/>
+
+commentJs 和 esModule 兼容及不兼容问题参考：
+
+<a href="https://es6.ruanyifeng.com/#docs/module-loader#ES6-%E6%A8%A1%E5%9D%97%E4%B8%8E-CommonJS-%E6%A8%A1%E5%9D%97%E7%9A%84%E5%B7%AE%E5%BC%82">参考链接</a>

@@ -33,6 +33,20 @@ export default ChildComp = forwardRef(ChildComp)
 /**
  * 注意
  * 如果是用dva的connect的包装
+ * 直接这样写
+ *
+ * export default connect(state => {
+    const {
+      dashboard: { enums },
+    } = state
+    return { enums }
+  })(forwardRef(ChildComp))
+ 
+ * 是不行的因为ref被Hoc 高阶组件{connect} “隔离了”
+
+ Error
+ Unhandled Rejection (Invariant Violation): You must pass a component to the function returned by connect. Instead received {}
+
  * 需要多加一个{forwardRef：true}的参数，如下：
  * */
 

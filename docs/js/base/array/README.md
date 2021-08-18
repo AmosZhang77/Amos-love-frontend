@@ -30,3 +30,21 @@ for (item of arr) {
 console.log(sum) //结果为 10
 
 ```
+
+# indexOf
+
+数组的内容是对象，可以用对象的引用来搜索位置
+```js
+const arr = [{n:1},{n:2},{n:3}]
+arr.indexOf(zjx[1]) // 1
+```
+
+### 数组浅拷贝
+
+```js
+arr2 = arr1.slice()
+```
+
+```js
+arr2 = [...arr1]
+```

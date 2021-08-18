@@ -166,6 +166,18 @@ module.exports = {
                 sidebarDepth: 3
               },
               {
+                title: 'string',
+                path: '/js/base/string/',
+                collapsable: false,
+                sidebarDepth: 3
+              },
+              {
+                title: 'class',
+                path: '/js/base/class/',
+                collapsable: false,
+                sidebarDepth: 3
+              },
+              {
                 title: 'set',
                 path: '/js/base/set/',
                 collapsable: false,
@@ -260,7 +272,7 @@ module.exports = {
                 sidebarDepth: 3
               },
               {
-                title: 'api',
+                title: 'fn',
                 path: '/react/base/fn/',
                 collapsable: true,
                 sidebarDepth: 3

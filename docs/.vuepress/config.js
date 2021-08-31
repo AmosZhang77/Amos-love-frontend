@@ -27,12 +27,12 @@ module.exports = {
       { text: 'Guide', link: '/guide/' },
     ],
     sidebar: [
-      {
-        title: '给作者一个认可',
-        path: '/sponsor/',
-        collapsable: false,
-        sidebarDepth: 1,
-      },
+      /* {
+          title: '给作者一个认可',
+          path: '/sponsor/',
+          collapsable: false,
+          sidebarDepth: 1,
+        }, */
       {
         title: '导读',
         path: '/guide/',
@@ -249,6 +249,12 @@ module.exports = {
                 sidebarDepth: 3
               },
             ]
+          },
+          {
+            title: 'code style',
+            path: '/js/code_style/',
+            collapsable: true,
+            sidebarDepth: 2
           }
         ]
       },

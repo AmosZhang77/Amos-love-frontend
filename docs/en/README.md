@@ -149,3 +149,12 @@ v.	鄙视; 蔑视; 看不起;
 
 [例句]He despised loose thinking.
 他鄙视不严谨的思维。
+
+react fiber
+
+fiber	英[faɪbə] 美[ˈfaɪbər]
+
+n.	（动植物的）纤维; 纤维质;
+
+[例句]The difficulty lies primarily in the fact that the fiber core is relatively small.
+困难主要在于纤维芯比较小。

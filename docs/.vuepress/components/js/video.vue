@@ -110,6 +110,6 @@ export default {
 </script>
 <style scoped lang="scss">
 .videoBox {
-  ｐadding: 20px;
+  padding: 20px;
 }
 </style>

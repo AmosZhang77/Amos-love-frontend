@@ -72,5 +72,89 @@ tutorial
 [tuːˈtɔːriəl]教程
 
 implement[ˈɪmplɪment]使生效; 贯彻; 执行; 实施;
+
 showcased[ʃəʊkeɪst]使展现; 在玻璃橱窗陈列;
+
 nonetheless [ˌnʌnðəˈles]尽管如此;
+
+bothered	英[ˈbɒðəd] 美[ˈbɑːðərd]
+
+v.	花费时间精力(做某事); 使(某人)烦恼(或担忧、不安); 给(某人)造成麻烦(或痛苦); 打扰; 搭话烦扰;
+
+bother的过去分词和过去式;
+
+[例句]I can't be bothered making a hot meal ─ it's too much like hard work.
+我懒得做热饭热菜——太麻烦了
+
+be bothered to 费心
+
+
+trivial	英[ˈtrɪviəl] 美[ˈtrɪviəl]
+
+adj.	不重要的; 琐碎的; 微不足道的;
+
+[例句]It's a trivial matter and not worth fighting about.
+这是一桩小事，不值得为之争辩。
+
+[其他]	比较级：more trivial 最高级：most trivial
+
+workaround 英[ˈwɜːkəraʊnd] 美[ˈwɜːrkəraʊnd]
+
+n.	应变方法; 变通方法;
+
+[例句]The WebSphere Application Server offers one example of this workaround.
+WebSphere应用服务器提供了一个这种解决方法的例子。
+
+heuristic 英[hjuˈrɪstɪk] 美[hjuˈrɪstɪk]
+
+adj.	(教学或教育)启发式的;
+
+[例句]Application on the Heuristic Algorithm Based on Time Expanded Network
+基于启发式算法的时间延伸网络研究与应用
+
+XXX is in fact a workaround, not a feature. 
+It was implemented only because at the time a good heuristic wasn’t found and an urgent fix was needed.
+XXX 实际上是一种变通的解决方法，不是一个功能。它被应用只是因为没现在没有找到启发式好的方法，然后需要一个紧急的修复方法
+
+nest	英[nest] 美[nest]
+
+n.	鸟巢; 鸟窝; 巢穴; 窝; 藏匿处; 秘密窝点;
+
+v.	筑巢; 巢居; 嵌套(信息);
+
+nest your code 嵌套代码
+
+
+literals	英[ˈlɪtərəlz] 美[ˈlɪtərəlz]
+
+网络	字面量; 常量; 字面值; 直接量; 文字;
+
+[例句]Date literals are always interpreted according to the English culture.
+将总是依据英语区域性解释日期文本。
+
+strive	英[straɪv] 美[straɪv]
+
+v.	努力; 奋斗; 力争; 力求;
+
+[例句]We encourage all members to strive for the highest standards.
+我们鼓励所有成员为达到最高标准而努力。
+
+strive to meet 努力满足
+
+despised	英[dɪˈspaɪzd] 美[dɪˈspaɪzd]
+
+v.	鄙视; 蔑视; 看不起;
+
+[词典]	despise的过去分词和过去式;
+
+[例句]He despised loose thinking.
+他鄙视不严谨的思维。
+
+react fiber
+
+fiber	英[faɪbə] 美[ˈfaɪbər]
+
+n.	（动植物的）纤维; 纤维质;
+
+[例句]The difficulty lies primarily in the fact that the fiber core is relatively small.
+困难主要在于纤维芯比较小。

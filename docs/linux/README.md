@@ -198,3 +198,4 @@ sudo apt-get install git
 ```shell
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 ```
+

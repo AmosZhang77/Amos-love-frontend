@@ -1241,3 +1241,17 @@ arr: 2 4 6 saveArr: 0 1 2 // 第6秒打印，最后一句最后打印，for前�
    最后一个迭代完成后（或者中途跳出后），再运行迭代后面语句一起处理（如过用reduce，见reduce方案1，注意关键语句先后顺序）；
    方案2：用map,forEach等将promise推到数组中，Promise.all可以实现迭代同时并行执行， 结果都得到之后，再运行迭代后面语句一起处理。也可用reduce实现，见reduce方案1，注意关键语句先后顺序***
 2. ***filter一般直接用Promise.all方案改写，原因见for第6条***
+
+
+### console
+
+### 打印dom信息
+
+1. 把它作为数组的一项或者是对象的一个属性值
+2. console.dir()
+
+### 打印对象
+
+运行中打印对象会显示运行最后的结果，需要打印当时的结果：
+
+console.log(JSON.stringify(obj)) 或者深拷贝

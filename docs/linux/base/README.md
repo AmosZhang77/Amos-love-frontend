@@ -33,3 +33,7 @@ dir
 ```shell
 rm -rf .idea
 ```
+
+### 新建文件夹
+
+mkdir

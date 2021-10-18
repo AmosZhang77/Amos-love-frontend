@@ -13,3 +13,31 @@
 npm install -g cloc
 
 ### 统计文件夹命令 cloc filename
+
+### XSS攻击 防御 dompurify
+
+```shell
+npm install dompurify
+```
+
+```js
+import DOMPurify from 'dompurify';
+
+var clean = DOMPurify.sanitize(dirty);
+
+let text = '<img/src=1 onerror=alert(1)>' // 用户填写的可能有风险的内容
+
+// 没有防护的时候，
+return (
+  <div
+    dangerouslySetInnerHTML={{ __html: text.replace(/\n/g, '<br />') }} // 将换行符替换成br，为了显示换行
+  />
+)
+
+// 用法
+return (
+  <div
+    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(text.replace(/\n/g, '<br />')) }}
+  />
+)
+```

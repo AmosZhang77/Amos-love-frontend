@@ -27,12 +27,12 @@ module.exports = {
       { text: 'Guide', link: '/guide/' },
     ],
     sidebar: [
-      {
-        title: '给作者一个认可',
-        path: '/sponsor/',
-        collapsable: false,
-        sidebarDepth: 1,
-      },
+      /* {
+          title: '给作者一个认可',
+          path: '/sponsor/',
+          collapsable: false,
+          sidebarDepth: 1,
+        }, */
       {
         title: '导读',
         path: '/guide/',
@@ -166,6 +166,18 @@ module.exports = {
                 sidebarDepth: 3
               },
               {
+                title: 'string',
+                path: '/js/base/string/',
+                collapsable: false,
+                sidebarDepth: 3
+              },
+              {
+                title: 'class',
+                path: '/js/base/class/',
+                collapsable: false,
+                sidebarDepth: 3
+              },
+              {
                 title: 'set',
                 path: '/js/base/set/',
                 collapsable: false,
@@ -237,6 +249,12 @@ module.exports = {
                 sidebarDepth: 3
               },
             ]
+          },
+          {
+            title: 'code style',
+            path: '/js/code_style/',
+            collapsable: true,
+            sidebarDepth: 2
           }
         ]
       },
@@ -260,7 +278,7 @@ module.exports = {
                 sidebarDepth: 3
               },
               {
-                title: 'api',
+                title: 'fn',
                 path: '/react/base/fn/',
                 collapsable: true,
                 sidebarDepth: 3

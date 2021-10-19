@@ -307,23 +307,9 @@ module.exports = {
           },
           {
             title: 'third party',
-            path: '/react/source_code/',
+            path: '/react/third_party/',
             collapsable: true,
             sidebarDepth: 2,
-            children: [
-              {
-                title: 'base',
-                path: '/react/source_code/base/',
-                collapsable: true,
-                sidebarDepth: 3
-              },
-              {
-                title: 'useful fn',
-                path: '/react/source_code/useful_fn/',
-                collapsable: true,
-                sidebarDepth: 3
-              }
-            ]
           },
         ]
       },
@@ -419,6 +405,26 @@ module.exports = {
             collapsable: true,
             sidebarDepth: 2,
           },
+        ]
+      },
+      {
+        title: '面试需背（你懂的）',
+        path: '/interview/',
+        collapsable: false,
+        sidebarDepth: 1,
+        children: [
+          {
+            title: '基础',
+            path: '/interview/base/',
+            collapsable: true,
+            sidebarDepth: 2,
+          },
+          // {
+          //   title: 'vscode',
+          //   path: '/editor/vscode/',
+          //   collapsable: true,
+          //   sidebarDepth: 2,
+          // },
         ]
       },
       {

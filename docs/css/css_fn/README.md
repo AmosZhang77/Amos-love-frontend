@@ -263,3 +263,41 @@ none
 ```
 
 
+### rem
+
+```js
+function setRem () {
+  const clientWidth = document.documentElement.clientWidth || document.body.clientWidth
+  
+  // 这个系数10也可以为100都可以，只要不太小，否则会导致rem的值过大，表示小尺寸的时候超出浏览器小数精度出现错误
+  document.querySelector("html").style.fontSize = clientWidth / 10 + "px" 
+}
+
+// 在开始和窗口resize的时候调用
+jQuery(function () {
+  setRem()
+  jQuery(window).on("resize", function () {
+    setRem()
+  })
+})
+```
+
+```scss
+// $width 设计稿宽读
+$widthDesign: 1440;
+$widthDesign2: 1920;
+
+// 缩放高度处理函数，得出数据单位rem
+@function t($width) {
+  // 这个系数10要与js中的一致
+  @return $width/($widthDesign/10)+rem;
+}
+
+// 使用
+.btn1 {
+  width: t(100); // 设计稿中100px
+}
+```
+
+wv可以完全代替rem方案，如果只要支持比较新的浏览器的话。也可以将html的字体设成1wv（相当于系数是100），
+这样rem根据窗口宽度变化的js就不需要了。

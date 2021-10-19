@@ -71,3 +71,114 @@ self.addEventListener('notificationclick', function(e) {
   }
 })
 ```
+
+### drag drop
+
+```vue
+<template>
+  <el-tree
+      class="filter-tree"
+      :data="videoTree"
+      :props="defaultProps"
+      default-expand-all
+      ref="videoTree"
+      @node-drag-start="elDragStart"
+      :draggable="draggable"
+      @node-drag-end="elHandleDragEnd"
+      :allow-drag="elAllowDrag"
+      :allow-drop="elAllowDrop">
+  </el-tree>
+  <div class="control t1c" ref="t1c" @dragover="allowDrop" @drop="dropV"></div>
+</template>
+<script>
+export default {
+  name: 'dashboard',
+  data () {
+    return {
+      videoTree: [
+        {
+          id: '1',
+          label: '阳光花园',
+          children: [
+            {
+              id: '1.1',
+              label: '东门',
+              ch: 'rtmp://58.200.131.2:1935/livetv/hunantv',
+            },
+            {
+              id: '1.2',
+              label: '南门',
+              ch: 'rtmp://live.hkstv.hk.lxdns.com/live/hks1',
+            },
+          ]
+        }, {
+          id: '2',
+          label: '宝辰怡景苑',
+          children: [
+            {
+              id: '2.1',
+              label: '东门',
+            },
+            {
+              id: '2.2',
+              label: '南门',
+            }
+          ]
+        }
+      ],
+      defaultProps: {
+        children: 'children',
+        label: 'label'
+      },
+
+      // 视频
+      draggable: true, // element，tree是否可以拖拽选项
+      draggingNote: false, // element，tree是否正在被拖拽
+      startNode: {},
+    }
+  },
+  methods: {
+    // 树上起始拖拽点
+    elDragStart (node, event) {
+      this.draggingNote = true // 记录有拖拽起点并且是正确的起点
+
+      // 记录拖拽起点树组件节点信息
+      this.startNode = node
+      console.log(node, event, 'start')
+    },
+    elHandleDragEnd (draggingNode, dropNode, dropType, ev) {
+      let _this = this
+      // 此需求不支持树节点之间的拖拽移动。当树节点为拖拽结束点时，清楚拖拽开始标志位
+      setTimeout(() => {_this.draggingNote = false}, 300)
+      console.log('tree drag end: ', dropNode && dropNode.label, dropType, ev)
+    },
+    elAllowDrag (draggingNode) {
+      console.log('draggingNode', draggingNode)
+      // 树的第二层子节点才允许拖拽
+      return draggingNode.level !== 1
+    },
+    elAllowDrop (draggingNode, dropNode) {
+      // console.log(draggingNode, dropNode, type)
+      // 禁止树节点为拖拽终点，防止树节点拖拽交换移动
+      return !(dropNode.level === 1 || dropNode.level === 2)
+    },
+    
+    // 需求目的地，允许拖拽放置
+    allowDrop (e) {
+      // 这里需求只想拖拽播放，并不是真的把dom移动过去
+      e.preventDefault()
+    },
+    
+    // 需求目的地，拖拽放置的事件
+    dropV (e) {
+      e.preventDefault()
+      console.log(e, 'end', this.draggingNote)
+      if (this.draggingNote === true) {
+        this.draggingNote = false
+       // 播放对应视频代码
+      }
+    }
+  }
+}
+</script>
+``` 

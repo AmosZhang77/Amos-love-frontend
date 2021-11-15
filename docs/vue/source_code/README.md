@@ -18,3 +18,25 @@ src
 ├── server # 服务端渲染
 ├── sfc # .vue 文件解析
 ├── shared # 共享代码
+
+instance/index.js
+
+```js
+function Vue (options) {
+if (process.env.NODE_ENV !== 'production' &&
+!(this instanceof Vue)
+) {
+warn('Vue is a constructor and should be called with the `new` keyword')
+}
+this._init(options)
+}
+
+initMixin(Vue) // 在原型上加入很多函数
+stateMixin(Vue)
+eventsMixin(Vue)
+lifecycleMixin(Vue)
+renderMixin(Vue)
+
+export default Vue
+```
+

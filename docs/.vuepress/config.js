@@ -419,12 +419,12 @@ module.exports = {
             collapsable: true,
             sidebarDepth: 2,
           },
-          // {
-          //   title: 'vscode',
-          //   path: '/editor/vscode/',
-          //   collapsable: true,
-          //   sidebarDepth: 2,
-          // },
+          {
+            title: 'question',
+            path: '/interview/question/',
+            collapsable: true,
+            sidebarDepth: 2,
+          },
         ]
       },
       {

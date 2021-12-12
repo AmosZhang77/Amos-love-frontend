@@ -94,9 +94,33 @@ class car {
     this.c3() // 这里react回调调c2，this是undifined，c3会在实例的prototype上，this拿不到实例
   }
 
+  // class本身上面增加静态属性及方法
   static staticFn = () => {
     console.log('class本身的方法')
   }
   static staticVal = 'class本身的属性'
+  
+  // react中指定默认标签属性值
+  staticdefaultProps = {
+    
+  }
 }
 ```
+
+###key 设置为 index可能会引发的问题：
+
+react中key用于diff算法中计算真实dom更新策略。
+1. key相同：
+（1） 内容相同，直接使用之前的真实dom。
+（2） 内容不同，生成新dom，替换调之前key相同位置的真实dom。
+2. 未找到key：
+ 生成新dom，渲染到页面
+
+index可能会引发的问题：
+1. 若对数据进行：逆序添加、逆序删除等破坏顺序的操作：会产生没有必要的dom真实dom更新。界面没有问题，效率低。
+2. 如果结构中包含输入类dom，界面会有问题。（如果在最开始插入一个input，第一个新的input因为key为0，
+而之前的第一个有输入内容的input的key为0，key一样。同时react不会保存input中的内容，
+故对于react来说两个input内容一样。这时更新策略时用之前的真实dom，所以react会误认不用更新，而用之前的真实dom，
+导致新增的input中有输入内容。然后下面直到倒数第二个内容都是之前的真实dom，所以输入内容都是和第一个一样往上错位。
+而最后一条老数据对应是新增的input，真实input的dom内容为空）
+3. 若没有以上破坏顺序的操作，不会产生问题

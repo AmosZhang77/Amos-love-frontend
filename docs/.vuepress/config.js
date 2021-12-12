@@ -306,6 +306,20 @@ module.exports = {
             ]
           },
           {
+            title: 'project learning',
+            path: '/react/project_learning/',
+            collapsable: true,
+            sidebarDepth: 2,
+            children: [
+              {
+                title: 'jira_ts',
+                path: '/react/project_learning/jira_ts',
+                collapsable: true,
+                sidebarDepth: 3
+              },
+            ]
+          },
+          {
             title: 'third party',
             path: '/react/third_party/',
             collapsable: true,

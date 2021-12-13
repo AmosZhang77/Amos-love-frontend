@@ -77,3 +77,155 @@ htmlToPdf.downloadPDF(
   "下载文件的文件名"
 )
 ```
+
+多选择框，由随后id计算出id路径数组。 不用记录parentId的方法
+
+```js
+const categoryId = '111'
+const category = [
+  {
+    id: '1',
+    children: [
+      {
+        id: '11',
+        children: [
+          {
+            id: '111',
+          },
+          {
+            id: '112',
+          },
+          {
+            id: '113',
+          },
+        ]
+      },
+      {
+        id: '12',
+        children: [
+          {
+            id: '121',
+          },
+          {
+            id: '122',
+          },
+          {
+            id: '123',
+          },
+        ]
+      }
+    ]
+  },
+  {
+    id: '2',
+    children: [
+      {
+        id: '21',
+        children: [
+          {
+            id: '211',
+          },
+          {
+            id: '212',
+          },
+          {
+            id: '213',
+          },
+        ]
+      },
+      {
+        id: '22',
+        children: [
+          {
+            id: '221',
+          },
+          {
+            id: '222',
+          },
+          {
+            id: '223',
+          },
+        ]
+      }
+    ]
+  }
+]
+
+const getIdArr = (categoryList, id) => {
+  let r= [];
+  for (let i = 0; i < categoryList.length; i += 1) {
+    if (categoryList[i].id === id) {
+      r = [categoryList[i].id];
+      break;
+    }
+    const children = categoryList[i]?.children ?? [];
+    for (let j = 0; j < children.length; j += 1) {
+      if (children[j].id === id) {
+        r = [categoryList[i].id, children[j]?.id];
+        break;
+      }
+      const children2 = children[j]?.children ?? [];
+
+      for (let k = 0; k < children2.length; k += 1) {
+        if (children2[k].id === id) {
+          console.log('成功');
+          r = [categoryList[i].id, children[j]?.id, children2[k]?.id];
+          break;
+        }
+      }
+    }
+  }
+  return r;
+};
+const getIdArr2 = (categoryList, id) => {
+  let r = [];
+  const fn = (
+    list,
+    idInner
+  ) => {
+    for (let i = 0; i < list.length; i += 1) {
+      if (list[i].id === idInner) {
+        return {
+          b: true,
+          r: [list[i].id],
+        };
+      }
+      const children = list[i]?.children ?? [];
+      if (children.length > 0) {
+        const inner = fn(children, idInner);
+        console.log('inner', inner);
+        if (inner.b === true) {
+          return { b: true, r: [list[i].id, ...inner.r] };
+        } else {
+          if (i === list.length - 1) {
+            return { b: false, r: [] };
+          }
+        }
+      } else {
+        if (i === list.length - 1) {
+          return {
+            b: false,
+            r: [],
+          };
+        }
+      }
+    }
+    return { b: false, r: [] };
+  };
+
+  const rObj = fn(categoryList, id);
+  if (rObj.b === true) {
+    r = [...rObj.r];
+  }
+  return r;
+};
+
+console.log(
+  'getIdArr2------------',
+
+  category,
+  categoryId,
+  getIdArr2(category, categoryId),
+  getIdArr(category, categoryId),
+);
+```

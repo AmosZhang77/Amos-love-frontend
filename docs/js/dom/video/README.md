@@ -1,5 +1,6 @@
 ### video标签
 
+<js-video1/>
 <js-video/>
 
 

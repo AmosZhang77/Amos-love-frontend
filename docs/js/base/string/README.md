@@ -40,3 +40,14 @@ console.log(str.includes('nonexistent')); // false
 console.log(str.includes('To be', 1));    // false
 console.log(str.includes('TO BE'));       // false
 ```
+
+### 保留两位小数
+
+```js
+// 输入数字，输出字符串
+var num =2.446242342;
+num = num.toFixed(2);  // 输出结果为 2.45
+
+// 输入数字，输出数字
+Math.floor(15.7784514000 * 100) / 100   // 输出结果为 15.77
+```

@@ -320,26 +320,33 @@ async await放在遍历方法（map、reduce、reduceRight、forEach、filter、
 所以循环结束后期望得到的最后结果无法获得
 
 ```js
+const aFn = async (val) => val
+
 const list = [{ api: true, val: '1st' }, { api: false, val: '2nd' },
-  { api: true, val: '3rd' }, { api: false, val: '4th' }]
+   { api: true, val: '3rd' }, { api: false, val: '4th' }]
 list.forEach(async (item, i, arr) => {
-  if (item.api === true) {
-    // 调接口类的异步操作
-    let res = await new Promise((resolve) => {resolve(item.val)}) // await api()
-    // 操作item
-    item.val2 = res
-    // 最后打印出来。操作item的影响list的作用效果也会最后出现，上面实际需要的地方拿不到。
-    console.log('item.val:', item.val)
-  } else if (item.api === false) {
-    // 无调接口的异步逻辑,第一个打印出来，操作item的影响list的作用效果，能在需要结果的地方拿到
-    // （也有下面的巨坑，打印arr，展开arr里面arr[0].val2有值，直接打印arr[0].val2没值）
-    console.log('item.val:', item.val, 'arr:', arr, 'arr[0].val2:', arr[0].val2)
-  }
+   if (item.api === true) {
+      // 调接口类的异步操作
+      // let res = await new Promise((resolve) => {resolve(item.val)}) // await api()
+      let res = await aFn(item.val) // 即使是个看似直接返回的函数，
+      // 只要包了async，如同下面基础回顾描述的，
+      // 执行的时候会包成new Promise((resolve) => {resolve(item.val)})
+
+      // 操作item
+      item.val2 = res
+      // 最后打印出来。操作item的影响list的作用效果也会最后出现，上面实际需要的地方拿不到。
+      console.log('item.val:', item.val)
+   } else if (item.api === false) {
+      item.val2 = item.val
+      // 无调接口的异步逻辑,第一个打印出来，操作item的影响list的作用效果，能在需要结果的地方拿到
+      // （也有下面的巨坑，打印arr，展开arr里面arr[0].val2有值，直接打印arr[0].val2没值）
+      console.log('item.val:', item.val, 'arr:', arr, 'arr[0].val2:', arr[0].val2)
+   }
 })
 // 在两个同步之后打印，两个异步还没结束，forEach入参函数async和异步分支中的await失效。
 // 这里拿不到想要的异步结果，异步逻辑做的item处理效果这里也会漏掉'
 // 需要结果的地方list[0]和list[3]的val2值拿不到
-console.log('list:', list, 'list[0].val2:', list[0].val2)
+console.log('list:', list, 'list[0].val2:', list[0].val2, 'list[1].val2:', list[1].val2)
 /**
  * 这里有个超级巨坑！list在浏览器中能打印出来想要的结果，
  * 浏览器打印list，list对象展开看到的是最后的list，

@@ -299,5 +299,26 @@ $widthDesign2: 1920;
 }
 ```
 
-wv可以完全代替rem方案，如果只要支持比较新的浏览器的话。也可以将html的字体设成1wv（相当于系数是100），
-这样rem根据窗口宽度变化的js就不需要了。
+vw可以完全代替rem方案， 不需要添加事件，根据窗口宽度变化改变rem。100vw永远等于窗口宽度。
+
+vw方案：
+设计稿750宽，1px相当于1/750*100vw
+可以用
+```scss
+// $width 设计稿宽读
+$widthDesign: 750;
+$widthDesign2: 1920;
+
+// 缩放高度处理函数，得出数据单位rem
+@function t($width) {
+  // 这个系数10要与js中的一致
+  @return $width/($widthDesign/100)+vw;
+}
+
+// 使用
+.btn1 {
+  width: t(100); // 设计稿中100px
+}
+```
+
+也可都写px，用webpack插件postcss-px-to-viewport，px统一计算并替换成vw

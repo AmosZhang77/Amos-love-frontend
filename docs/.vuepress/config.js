@@ -313,7 +313,7 @@ module.exports = {
             children: [
               {
                 title: 'jira_ts',
-                path: '/react/project_learning/jira_ts',
+                path: '/react/project_learning/jira_ts/',
                 collapsable: true,
                 sidebarDepth: 3
               },

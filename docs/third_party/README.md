@@ -71,3 +71,8 @@ nrm use taobao
 ```shell
 nrm test newname
 ```
+
+移动端调试功能
+vconsole
+
+通过环境判断决定是否启用vconsole，比如开发环境，或者线上环境

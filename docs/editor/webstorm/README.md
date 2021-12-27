@@ -34,3 +34,19 @@ module.exports = {
   }
 }
 ```
+
+```js
+let a = 1
+let b = 1
+// 用//#region //#endregion手动添加折叠区域
+
+//#region 
+let c = 1
+let d = 1
+let e = 1
+//#endregion
+let f = 1
+let g = 1
+let h = 1
+```
+

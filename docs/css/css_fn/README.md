@@ -322,3 +322,11 @@ $widthDesign2: 1920;
 ```
 
 也可都写px，用webpack插件postcss-px-to-viewport，px统一计算并替换成vw
+
+微信浏览器文字打断，连续逗号打断，因为兼容性问题，目前只找到以下方法：
+```css
+.white-space{
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+```

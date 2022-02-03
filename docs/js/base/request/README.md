@@ -17,3 +17,5 @@ const reqFn = async () => {
 }
 ```
 
+后端允许跨域，用于跳过浏览器的同源协议。可以用于开发环境，不配代理的情况
+response.addHeader("Access-Control-Allow-Origin", "*");

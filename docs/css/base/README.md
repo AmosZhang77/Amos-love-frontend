@@ -61,3 +61,16 @@ flex容器的子元素如果没有指定宽度，子元元素会被孙子等元�
     top: 50px;    
 }
 ```
+
+-webkit-input-placeholder 伪元素浏览器查看不到
+
+需要在控制台勾选 Show user agent shadow DOM
+
+<img src="./images/shadowDom.png" />
+
+```css
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+    color: yellow;
+}
+```

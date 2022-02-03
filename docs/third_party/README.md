@@ -41,3 +41,38 @@ return (
   />
 )
 ```
+
+方便切npm源工具： nrm
+
+```shell
+npm install -g nrm
+```
+
+执行命令nrm ls查看可选的源
+
+```shell
+nrm uls
+```
+
+添加自定义源
+
+```shell
+nrm add newname http://registry.npm.frp.trmap.cn/
+```
+
+切换
+
+```shell
+nrm use taobao
+```
+
+测试速度
+
+```shell
+nrm test newname
+```
+
+移动端调试功能
+vconsole
+
+通过环境判断决定是否启用vconsole，比如开发环境，或者线上环境

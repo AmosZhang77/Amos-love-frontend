@@ -30,3 +30,6 @@ for (let o in p) {
 p.playOrg() // playOrgClaseFn
 p.play() // palyFnDo
 ```
+
+
+class 内部的方法中是局部严格模式，外部调也同样，console.log（this） 不会默认指向window，而是undefined

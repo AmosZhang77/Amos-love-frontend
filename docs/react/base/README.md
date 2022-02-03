@@ -124,3 +124,69 @@ index可能会引发的问题：
 导致新增的input中有输入内容。然后下面直到倒数第二个内容都是之前的真实dom，所以输入内容都是和第一个一样往上错位。
 而最后一条老数据对应是新增的input，真实input的dom内容为空）
 3. 若没有以上破坏顺序的操作，不会产生问题
+
+
+### router 传参
+
+url params路由传参
+```jsx
+const data = {
+  name: 'jack',
+  age: '23',
+}
+const dataStr= JSON.stringify(data) // 这里前后会多俩个花括号，可能要切掉才能用
+
+const path = `xxx/user/${dataStr}`
+
+console.log(path)
+// react router的history
+history.push(path) // 命令式路由
+
+return (
+  <div>
+   <Link to={path}>点我跳转</Link>
+
+   {/*url params路由 router中必须要有占位符*/}
+   <Router path='xxx/user/:data' component={UserPage}/>
+  </div>
+)
+```
+
+query路由传参
+```jsx
+const data = {
+  name: 'jack',
+  age: '23',
+}
+const path = {
+  pathname:'xxx/user',
+ query: data
+}
+
+// react router的history
+history.push(path)
+
+return (<Link to={path}>点我跳转</Link>)
+```
+除了 params query路由传参
+
+还有state传参，不会显示在url上，会存在history对象上，刷新页面也能保留！！！
+
+```jsx
+const data = {
+  name: 'jack',
+  age: '23',
+}
+const path = {
+  pathname:'xxx/user',
+ state: data
+}
+
+// react router的history
+history.push(path)
+
+return (<Link to={path}>点我跳转</Link>)
+
+// 获取参数
+const data = this.props.location.state
+```

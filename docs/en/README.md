@@ -158,3 +158,23 @@ n.	（动植物的）纤维; 纤维质;
 
 [例句]The difficulty lies primarily in the fact that the fiber core is relatively small.
 困难主要在于纤维芯比较小。
+
+
+deposit 英 [diˈpɔzit] 美 [dɪˈpɑzɪt]
+
+n.定金；存款；押金；存放物
+
+例句：
+
+You can pay a deposit first.
+
+您可以先付定金。
+
+
+fine-tune	英[ˌfaɪn ˈtjuːn] 美[ˌfaɪn ˈtuːn]
+
+vt.	对…微调;
+
+[例句]The system is set up but it needs some fine-tuning.
+
+该系统已装配好，但需要一些细小调整。

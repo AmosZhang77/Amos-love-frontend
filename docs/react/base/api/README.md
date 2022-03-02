@@ -21,4 +21,24 @@ class PieReact extends React.Component {
     )
   }
 }
+
+```
+
+### cloneElement
+
+React.cloneElement
+children可能是组件使用者传入的一个按钮，给按钮添加事件，并且不在其组件结构外侧加结构（可以保证其样式布局结构不改变）
+
+在使用cloneElement之前要用React.isValidElement判断一下
+```jsx
+
+<>
+  {React.isValidElement(children)
+    ? React.cloneElement(children, {
+      onClick: openModal,
+    })
+    : children}
+  <Popup>弹窗</Popup>
+</> 
+
 ```

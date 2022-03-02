@@ -182,3 +182,26 @@ export default {
 }
 </script>
 ``` 
+
+### window.location.href
+
+window.location.href = 'https://www.baidu.com/' 的操作并不是同步的，之后的代码还是会运行的。
+但也不会等同步代码都运行完，才加载新页面。而是去加载页面有了新的页面来了之后，之前的代码逻辑都不运行了。
+```js
+// 加载了baidu的页面，就会停止之前的打印逻辑代码，会打印到2000-3000，视网速而定。
+window.location.href = 'https://www.baidu.com/'
+
+// 会更快返回地址错误，加载浏览器找不到网址的页面，就会停止之前的打印逻辑代码，会打印到800左右，视网速而定。
+// 浏览器默认本地的缺省页加载肯定比远程的百度快，所以打印的次数就少。
+// window.location.href = 'https://www.baidu1.com/' 
+
+for (let i = 0; i < 10000; i += 1) {
+  console.log(i)
+}
+```
+
+虽然window.location.href = 'https://www.baidu.com/' 的操作并不是同步的，但是之后
+```js
+window.location.href = 'https://www.baidu.com/'
+throw new Error('')
+```

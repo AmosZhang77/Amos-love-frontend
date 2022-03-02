@@ -400,3 +400,16 @@ body {
 }
 
 ```
+
+超出两行省略号
+
+```css
+.clip2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+```

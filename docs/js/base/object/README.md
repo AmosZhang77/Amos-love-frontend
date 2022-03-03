@@ -42,11 +42,23 @@ let o1 = { a: 1, b: 1, c: 1 }
 let o2 = { b: 2, c: 2 }
 let o3 = { c: 3 }
 
-let obj = Object.assign({}, o1, o2, o3)
+let obj = Object.assign({}, o1, o2, o3) 
 console.log(obj) // { a: 1, b: 2, c: 3 }
-
 ```
 
+注意！！！ assign直接用于合并对象会改变原对象，多加个{}作为参一，可以避免
+
+```js
+let o1 = { a: 1, b: 1, c: 1 }
+let o2 = { b: 2, c: 2 }
+let obj1 = Object.assign(o1, o2) // o1会被改变，o1{ a: 1, b: 2, c: 2 }
+console.log(obj1) // { a: 1, b: 2, c: 2 }
+
+o1 = { a: 1, b: 1, c: 1 }
+let obj2 = Object.assign({}, o1, o2) // {}作为参1，达到相同目的，但是o1不会被改变
+console.log(obj2) // { a: 1, b: 2, c: 2 }
+console.log(o1) // { a: 1, b: 1, c: 1 }
+```
 #### 剩余运算符 方法
 
 ```js

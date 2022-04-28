@@ -27,3 +27,15 @@
 
 ### 忽略单行检查
 /* tslint:disable */
+
+### 其他没有设定属性，设定一个类型，[propName: string]
+
+```typescript
+interface a {
+  a: string;
+  b: number;
+  [propName: string]: any;
+}
+```
+
+其他没有使用的属性名 可以统一使用[propName: string]: number | string | boolean | Array<string>;

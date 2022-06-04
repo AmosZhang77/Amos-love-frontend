@@ -27,3 +27,10 @@
 
 ### 忽略单行检查
 /* tslint:disable */
+
+ts内建重要类型
+
+dom
+```typescript
+const dom: HTMLElement = document.getElementById('app')
+```

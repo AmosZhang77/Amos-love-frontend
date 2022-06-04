@@ -255,7 +255,22 @@ module.exports = {
             path: '/js/code_style/',
             collapsable: true,
             sidebarDepth: 2
-          }
+          },
+          {
+            title: 'ts',
+            path: '/js/ts/',
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+              {
+                title: 'base learning',
+                path: '/js/ts/base_learning/',
+                collapsable: false,
+                sidebarDepth: 3
+              },
+
+            ]
+          },
         ]
       },
 

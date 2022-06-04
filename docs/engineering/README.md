@@ -196,3 +196,11 @@ getModule().then(getModule2()) // 第一次引入，异步完成后再次引入�
 commentJs 和 esModule 兼容及不兼容问题参考：
 
 <a href="https://es6.ruanyifeng.com/#docs/module-loader#ES6-%E6%A8%A1%E5%9D%97%E4%B8%8E-CommonJS-%E6%A8%A1%E5%9D%97%E7%9A%84%E5%B7%AE%E5%BC%82">参考链接</a>
+
+
+## deploy 本项目发布
+
+使用脚本deploy.sh实现快速发布，windows对于sh的linux命令暂时有支持性问题，可用git的bash来跑脚本
+```shell
+bash deploy.sh // 实际运行脚本
+```

@@ -457,6 +457,12 @@ module.exports = {
         ]
       },
       {
+        title: '其他未分类',
+        path: '/other/',
+        collapsable: false,
+        sidebarDepth: 1,
+      },
+      {
         title: 'EN',
         path: '/en/',
         collapsable: false,

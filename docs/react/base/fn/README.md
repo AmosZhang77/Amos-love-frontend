@@ -30,6 +30,22 @@ let ChildComp = (props, ref) => {
 }
 export default ChildComp = forwardRef(ChildComp)
 
+// 这样ts情况可以少写一个类型
+import { useState, useImperativeHandle, forwardRef } from 'react'
+// props子组件中需要接受ref
+let ChildComp = forwardRef((props, ref) => {
+  // 此处注意useImperativeHandle方法的的第一个参数是目标元素的ref引用
+  useImperativeHandle(ref, () => ({
+    // changeVal 就是暴露给父组件的方法
+    changeVal: (newVal) => {
+
+    }
+  }))
+  return (
+    <div>{val}</div>
+  )
+})
+export default ChildComp
 /**
  * 注意
  * 如果是用dva的connect的包装

@@ -265,7 +265,8 @@ none 元素永远不会成为鼠标事件的target。但是，当其后代元素
 function setRem () {
   const clientWidth = document.documentElement.clientWidth || document.body.clientWidth
 
-  // 这个系数10也可以为100都可以，只要不太小，否则会导致rem的值过大，表示小尺寸的时候超出浏览器小数精度出现错误
+  // 这个系数10也可以为100都可以，只要不太小，否则会导致rem的值过大，
+  // 表示小尺寸的时候超出浏览器小数精度出现错误
   document.querySelector("html").style.fontSize = clientWidth / 10 + "px"
 }
 
@@ -279,7 +280,7 @@ jQuery(function () {
 ```
 
 ```scss
-// $width 设计稿宽读
+// $width 设计稿宽度
 $widthDesign: 1440;
 $widthDesign2: 1920;
 
@@ -317,6 +318,23 @@ $widthDesign2: 1920;
 ```
 
 也可都写px，用webpack插件postcss-px-to-viewport，px统一计算并替换成vw
+
+配置
+```ts
+{
+  extraPostCSSPlugins: [
+    px2vw({
+      // 设计稿宽度
+      viewportWidth: 750, // (Number) The width of the viewport.
+      viewportUnit: 'vw', // (String) Expected units.
+      selectorBlackList: ['.ignore', '.hairlines'], // (Array) The selectors to ignore and leave as px.
+      // 最小不转换的阈值
+      minPixelValue: 1,
+    }),
+  ]
+}
+
+```
 
 微信浏览器文字打断，连续逗号打断，因为兼容性问题，目前只找到以下方法：
 

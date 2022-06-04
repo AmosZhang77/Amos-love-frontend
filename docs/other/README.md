@@ -23,7 +23,7 @@
 
 ## win11 右键菜单改单层
 
-cmd 输入如下命令，重启电脑
+Win+R输入cmd，回车 ，输入如下命令，重启电脑（一定要在cmd里面输入，power shell里面没用）
 ```shell
 reg add HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32 /f /ve
 ```

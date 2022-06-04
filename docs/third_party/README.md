@@ -76,3 +76,16 @@ nrm test newname
 vconsole
 
 通过环境判断决定是否启用vconsole，比如开发环境，或者线上环境
+
+nvm在windows下未开启脚本安全策略时，切换版本会报乱码错误
+管理员打开shell，输入以下两个命令
+
+打开权限
+
+参数详情参阅：
+
+https://docs.microsoft.com/zh-cn/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.2
+设置执行策略为要求远程脚本签名，范围为当前用户
+```shell
+   Set-ExecutionPolicy Unrestricted -Scope CurrentUser
+```

@@ -28,6 +28,14 @@
 ### 忽略单行检查
 /* tslint:disable */
 
+ts内建重要类型
+
+dom
+```typescript
+const dom: HTMLElement = document.getElementById('app')
+```
+
+
 ### 其他没有设定属性，设定一个类型，[propName: string]
 
 ```typescript

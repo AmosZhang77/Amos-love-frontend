@@ -88,12 +88,22 @@ set-ExecutionPolicy RemoteSigned
 
 https://docs.microsoft.com/zh-cn/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.2
 设置执行策略为要求远程脚本签名，范围为当前用户
+
+win11
 ```shell
    Set-ExecutionPolicy RemoteSigned
 #   上面输入之后会显示ExecutionPolicy:  
 #   输入 CurrentUser
 CurrentUser
 ```
+
+win10
+```shell
+Set-ExecutionPolicy Unrestricted -Scope CurrentUser
+```
+
+如在普通shell里面nvm use 版本 报乱码错误，尝试在管理员shell里面执行use命令
+
 
 
 nvm 在安装版本前修改源能帮助顺利安装上

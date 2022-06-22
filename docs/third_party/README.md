@@ -72,6 +72,28 @@ nrm use taobao
 nrm test newname
 ```
 
+方便切yarn源工具： yrm
+
+在且yarn源的时候会一起把npm源一起切了
+
+```shell
+npm install -g yrm
+```
+
+执行命令yrm  ls查看可选的源
+
+切换
+
+```shell
+yrm use taobao
+```
+
+切换 sass源
+```shell
+npm config set sass_binary_site https://npm.taobao.org/mirrors/node-sass/
+
+```
+
 移动端调试功能
 vconsole
 

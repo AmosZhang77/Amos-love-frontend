@@ -14,6 +14,7 @@
 
 值： cmd.exe;powershell.exe;git.exe;idea64.exe
 
+（只新增下面这个貌似也可以）
 
 数值名称： hookapi_disins
 

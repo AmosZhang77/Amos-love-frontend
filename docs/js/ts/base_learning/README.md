@@ -384,15 +384,15 @@ let foo: Lucky = 'One';
 字符串字面量 限定了使用该字面量的地方仅接受特定的值,联合类型 对于值并没有限定，仅仅限定值的类型需要保持一致
 
 #### 2. 函数
-#### 4.1 函数的定义
+#### 2.1 函数的定义
 
 ```typescript
-
-```
-   function hello(name:string):void {
+function hello(name:string):void {
    console.log('hello',name);
    }
    hello('zfpx');
+```
+   
 #### 4.2 函数表达式
    定义函数类型
 ```typescript

@@ -2,7 +2,30 @@
 
 多列光标同时输入：alt+鼠标左键键点击选择
 
-删除光标后面内容：空格+del
+展开收起代码块：ctrl+-  ctrl++
+
+删除光标后面内容：ctrl+del
+
+删除光标前面内容：ctrl+del
+
+开启设置： ctrl+alt+s
+
+打开粘贴板：ctrl+shift+v
+
+上下滚动：ctrl+方向箭头
+
+展示隐藏目录：alt+1
+
+代码提示：ctrl+space
+
+
+file => manage IDE setting 导入导出webstorm配置文件
+
+因为与win快捷键冲突，自定义快捷键：
+
+回到上个光标位置 ctrl+alt+pageUp
+
+回到下个光标位置 ctrl+alt+pageDown
 
 ### 函数参数类型提示
 

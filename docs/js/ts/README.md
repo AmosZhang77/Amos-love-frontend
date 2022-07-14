@@ -68,3 +68,15 @@ declare namespace API1 {
 export default function(initialState: API1.InitialStateItem) {
 }
 ```
+
+### 接口合并 接口拓展
+
+可使用继承接口的方式
+
+也可以使用&拼接的作用
+```typescript
+type A1 = {name:string}
+type A2 = {age:number}
+type A = A1 & A2
+let b: A = {name:'sansan',age:22}
+```

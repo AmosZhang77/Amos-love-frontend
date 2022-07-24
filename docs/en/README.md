@@ -178,3 +178,5 @@ vt.	对…微调;
 [例句]The system is set up but it needs some fine-tuning.
 
 该系统已装配好，但需要一些细小调整。
+
+subclass 子类

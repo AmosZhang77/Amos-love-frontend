@@ -24,6 +24,7 @@
     "@vuepress/plugin-back-to-top": "^1.8.2",
     "@vuepress/plugin-medium-zoom": "^1.8.2",
     "node-sass": "^6.0.0",
+    "prettier": "2.7.1",
     "sass-loader": "^10.2.0",
     "vuepress": "^1.8.2"
   },

@@ -1,13 +1,22 @@
-### ts基础学习
+### ts 基础学习
 
-tsconfig.json 文件，ts配置文件
+安装，编译
+```shell
+cnpm i typescript -g
+tsc helloworld.ts
+```
+
+tsconfig.json 文件，ts 配置文件
+
 ```javascript
 // tsconfig.json
 const config = {
-  "compilerOptions": {
+  compilerOptions: {
     /* Basic Options */
-    "target": "es5",                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. 指定ECMAScript的目标版本*/
-    "module": "commonjs",                     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. 指定模块代码的生成方式*/
+    target:
+      "es5" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. 指定ECMAScript的目标版本*/,
+    module:
+      "commonjs" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. 指定模块代码的生成方式*/,
     // "lib": [],                             /* Specify library files to be included in the compilation. 指定编译的时候用来包含的编译文件*/
     // "allowJs": true,                       /* Allow javascript files to be compiled. 允许编译JS文件*/
     // "checkJs": true,                       /* Report errors in .js files. 在JS中包括错误*/
@@ -61,8 +70,8 @@ const config = {
     /* Experimental Options */
     // "experimentalDecorators": true,        /* Enables experimental support for ES7 decorators. 启动装饰器*/
     // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
-  }
-}
+  },
+};
 ```
 
 ### 1. 数据类型
@@ -82,7 +91,7 @@ let age: number = 10;
 #### 1.3 字符串类型(string)
 
 ```typescript
-let firstname: string = 'Jack';
+let firstname: string = "Jack";
 ```
 
 #### 1.4 数组类型(array)
@@ -97,20 +106,19 @@ let arr3: Array<number> = [7, 8, 9];
 在 TypeScript 的基础类型中，元组（ Tuple ）表示一个已知数量和类型的数组
 
 ```typescript
-let tuple: [string, number] = ['tuple', 5];
+let tuple: [string, number] = ["tuple", 5];
 tuple[0].length;
 tuple[1].toFixed(2);
 ```
 
-| 元组        | 数组           |
-| :-------------:|:-------------:|
-| 每一项可以是不同的类型    | 每一项都是同一种类型 | 
-| 有预定义的长度      | 没有长度限制      |
-| 用于表示一个结构 | 用于表示一个列表 | 
-
+|          元组          |         数组         |
+| :--------------------: | :------------------: |
+| 每一项可以是不同的类型 | 每一项都是同一种类型 |
+|     有预定义的长度     |     没有长度限制     |
+|    用于表示一个结构    |   用于表示一个列表   |
 
 ```typescript
-const animal: [string, number, boolean] = ['cat', 10, true];
+const animal: [string, number, boolean] = ["cat", 10, true];
 ```
 
 #### 1.6 枚举类型(enum)
@@ -121,16 +129,16 @@ const animal: [string, number, boolean] = ['cat', 10, true];
 
 ```typescript
 enum Gender {
-    GIRL,
-    BOY
+  GIRL,
+  BOY,
 }
 
 console.log(`李雷是${Gender.BOY}`);
 console.log(`韩梅梅是${Gender.GIRL}`);
 
 enum Week {
-    MONDAY = 1,
-    TUESDAY = 2
+  MONDAY = 1,
+  TUESDAY = 2,
 }
 
 console.log(`今天是星期${Week.MONDAY}`);
@@ -146,33 +154,37 @@ console.log(`今天是星期${Week.MONDAY}`);
 
 ```typescript
 const enum Colors {
-    Red,
-    Yellow,
-    Blue
+  Red,
+  Yellow,
+  Blue,
 }
 
 let myColors = [Colors.Red, Colors.Yellow, Colors.Blue];
 
-const enum Color {Red, Yellow, Blue = "blue".length}; // 这里会报错
+const enum Color {
+  Red,
+  Yellow,
+  Blue = "blue".length,
+} // 这里会报错
 // const enum member initializers can only contain literal values and other computed enum values.
 ```
 
 #### 1.7 任意类型(any)
 
-any就是可以赋值给任意类型
+any 就是可以赋值给任意类型
 
-第三方库没有提供类型文件时可以使用any
+第三方库没有提供类型文件时可以使用 any
 
 类型转换遇到困难时
 
 数据结构太复杂难以定义
 
 ```typescript
-let root: any = document.getElementById('root');
-root.style.color = 'red';
+let root: any = document.getElementById("root");
+root.style.color = "red";
 
 // 这里只是举个例子，实际上这里应该用ts内建类型
-let root2: HTMLElement = document.getElementById('root2');
+let root2: HTMLElement = document.getElementById("root2");
 ```
 
 3.8 null 和 undefined
@@ -192,7 +204,7 @@ x = null;
 let y: number | null | undefined;
 y = 1;
 y = undefined;
-y = null;  
+y = null;
 ```
 
 #### 1.9 void 类型
@@ -203,29 +215,29 @@ void 表示没有任何类型
 
 当我们声明一个变量类型是 void 的时候，它的非严格模式下仅可以被赋值为 null 和 undefined;
 
-严格模式 仅为undefined（此处严格模式指的时ts中的strictNullChecks配置）
+严格模式 仅为 undefined（此处严格模式指的时 ts 中的 strictNullChecks 配置）
 
 ```typescript
 function greeting(name: string): void {
-    console.log('hello', name);
+  console.log("hello", name);
 }
 
-greeting('boy');
+greeting("boy");
 ```
 
-#### 1.10 never类型
+#### 1.10 never 类型
 
-never是其它类型(null undefined)的子类型，代表不会出现的值
+never 是其它类型(null undefined)的子类型，代表不会出现的值
 
 #### 1.10.1
 
 作为不会返回（ return ）的函数的返回值类型
 
-// 返回never的函数 必须存在 无法达到（ unreachable ） 的终点
+// 返回 never 的函数 必须存在 无法达到（ unreachable ） 的终点
 
 ```typescript
 function error(message: string): never {
-    throw new Error(message);
+  throw new Error(message);
 }
 ```
 
@@ -233,20 +245,19 @@ function error(message: string): never {
 
 ```typescript
 function fail() {
-    return error("Something failed");
+  return error("Something failed");
 }
 
 // 返回never的函数 必须存在 无法达到（ unreachable ） 的终点
 function infiniteLoop(): never {
-    while (true) {
-    }
+  while (true) {}
 }
 ```
 
 #### 1.10.2 strictNullChecks
 
 在 TS 中， null 和 undefined 是任何类型的有效值，所以无法正确地检测它们是否被错误地使用。
-于是 TS 引入了 --strictNullChecks 这一种检查模式 
+于是 TS 引入了 --strictNullChecks 这一种检查模式
 
 由于引入了 --strictNullChecks ，在这一模式下，null 和 undefined 能被检测到。
 所以 TS 需要一种新的底部类型（ bottom type ）。所以就引入了 never。
@@ -255,38 +266,38 @@ function infiniteLoop(): never {
 
 ```typescript
 function fn(x: propType) {
-    if (typeof x === 'number') {
-// x: number 类型
-    } else if (typeof x === 'string') {
-// x: string 类型
-    } else {
-// x: never 类型
-// --strictNullChecks 模式下，这里的代码将不会被执行，x 无法被观察
-    }
+  if (typeof x === "number") {
+    // x: number 类型
+  } else if (typeof x === "string") {
+    // x: string 类型
+  } else {
+    // x: never 类型
+    // --strictNullChecks 模式下，这里的代码将不会被执行，x 无法被观察
+  }
 }
 ```
 
 一种适用场景
+
 ```typescript
 // strictNullChecks 配置为true
-type AllPropType = number | string
+type AllPropType = number | string;
 function handleValue(val: propType) {
-    switch (val.type) {
-        case 'number':
-            // 这里 val 被收窄为 number
-            break
-        case 'string':
-            // val 在这里是 string
-            break
-        default:
-            // val 在这里是 never
-            const exhaustiveCheck: never = val
-            break
-    }
+  switch (val.type) {
+    case "number":
+      // 这里 val 被收窄为 number
+      break;
+    case "string":
+      // val 在这里是 string
+      break;
+    default:
+      // val 在这里是 never
+      const exhaustiveCheck: never = val;
+      break;
+  }
 }
-
-
 ```
+
 但是假如后来有一天你的同事改了 propType 的类型：
 
 type AllPropType = number | string | boolean
@@ -296,7 +307,7 @@ type AllPropType = number | string | boolean
 
 #### 1.10.3 never 和 void 的区别
 
-void 可以被赋值为 null 和 undefined的类型。 never 则是一个不包含值的类型。
+void 可以被赋值为 null 和 undefined 的类型。 never 则是一个不包含值的类型。
 
 拥有 void 返回值类型的函数能正常运行。拥有 never 返回值类型的函数无法正常返回，无法终止，或会抛出异常。
 
@@ -304,14 +315,14 @@ void 可以被赋值为 null 和 undefined的类型。 never 则是一个不包�
 
 是指编程语言中能够自动推导出值的类型的能力，它是一些强静态类型语言中出现的特性
 
-定义时未赋值就会推论成any类型
+定义时未赋值就会推论成 any 类型
 
 如果定义的时候就赋值就能利用到类型推论
 
 ```typescript
 let username2; // 这里会推论成any
 username2 = 10;
-username2 = 'cat';
+username2 = "cat";
 username2 = null;
 ```
 
@@ -326,17 +337,17 @@ JavaScript 的类型分为两种：原始数据类型（Primitive data types）�
 布尔值 数值 字符串 null undefined Symbol
 
 ```typescript
-let name = 'cat';
+let name = "cat";
 console.log(name.toUpperCase());
 
-console.log((new String('cat')).toUpperCase());
+console.log(new String("cat").toUpperCase());
 ```
 
 当调用基本数据类型方法的时候，JavaScript 会在原始数据类型和对象类型之间做一个迅速的强制性切换
 
 ```typescript
 let isOK1: boolean = true; // 编译通过
-let isOK2: boolean = Boolean(1) // 编译通过
+let isOK2: boolean = Boolean(1); // 编译通过
 let isOK3: boolean = new Boolean(1); // 编译失败   期望的 isOK 是一个原始数据类型
 ```
 
@@ -345,10 +356,10 @@ let isOK3: boolean = new Boolean(1); // 编译失败   期望的 isOK 是一个�
 联合类型上只能访问两个类型共有的属性和方法
 
 ```typescript
-function fn (name4: string | number){
-    console.log(name4.toUpperCase()); // 报错 Property 'toUpperCase' does not exist on type 'string | number'.
+function fn(name4: string | number) {
+  console.log(name4.toUpperCase()); // 报错 Property 'toUpperCase' does not exist on type 'string | number'.
 }
-fn()
+fn();
 ```
 
 #### 1.14 类型断言
@@ -359,22 +370,22 @@ fn()
 
 ```typescript
 function fn(name5: string | number) {
-    const a = (name5 as number).toFixed(3);
-    const b = (name5 as string).length;
-    
-    // 不能将联合类型断言为不存在的类型
-    const c = (name5 as boolean); // 报错Conversion of type 'string | number' to type 'boolean' may be a mistake because neither type sufficiently overlaps with the other.
-    console.log(a, b, c)
+  const a = (name5 as number).toFixed(3);
+  const b = (name5 as string).length;
+
+  // 不能将联合类型断言为不存在的类型
+  const c = name5 as boolean; // 报错Conversion of type 'string | number' to type 'boolean' may be a mistake because neither type sufficiently overlaps with the other.
+  console.log(a, b, c);
 }
 
-fn()
+fn();
 ```
 
 #### 1.15 字符串、数字、布尔值字面量
 
 ```typescript
-type Lucky = 1 | 'One' | true;
-let foo: Lucky = 'One';
+type Lucky = 1 | "One" | true;
+let foo: Lucky = "One";
 ```
 
 #### 1.16 字符串字面量 vs 联合类型
@@ -384,72 +395,405 @@ let foo: Lucky = 'One';
 字符串字面量 限定了使用该字面量的地方仅接受特定的值,联合类型 对于值并没有限定，仅仅限定值的类型需要保持一致
 
 #### 2. 函数
+
 #### 2.1 函数的定义
 
 ```typescript
-function hello(name:string):void {
-   console.log('hello',name);
-   }
-   hello('zfpx');
-```
-   
-#### 4.2 函数表达式
-   定义函数类型
-```typescript
-
-```
-   type GetUsernameFunction = (x:string,y:string)=>string;
-   let getUsername:GetUsernameFunction = function(firstName,lastName){
-   return firstName + lastName;
-   }
-#### 4.3 没有返回值
-```typescript
-
-```
-   let hello2 = function (name:string):void {
-   console.log('hello2',name);
-   }
-   hello('zfpx');
-   hello2('zfpx');
-#### 4.4 可选参数
-   在TS中函数的形参和实参必须一样，不一样就要配置可选参数,而且必须是最后一个参数
-```typescript
-
-```
-function print(name:string,age?:number):void {
-console.log(name,age);
+function hello(name: string): void {
+  console.log("hello", name);
 }
-print('zfpx');
-#### 4.5 默认参数
-```typescript
-
+hello("Jack");
 ```
-function ajax(url:string,method:string='GET') {
-console.log(url,method);
-}
-ajax('/users');
-#### 4.6 剩余参数
-```typescript
 
+#### 2.2 函数表达式
+
+定义函数类型
+
+```typescript
+type GetUsernameFunction = (x: string, y: string) => string;
+let getUsername: GetUsernameFunction = function (firstName, lastName) {
+  return firstName + lastName;
+};
 ```
-function sum(...numbers:number[]) {
-return numbers.reduce((val,item)=>val+=item,0);
+
+#### 2.3 没有返回值
+
+```typescript
+let hello2 = function (name: string): void {
+  console.log("hello2", name);
+};
+hello2("zfpx");
+```
+
+#### 2.4 可选参数
+
+在 TS 中函数的形参和实参必须一样，不一样就要配置可选参数,而且必须是最后一个参数
+
+```typescript
+function print(name: string, age?: number): void {
+  console.log(name, age);
 }
-console.log(sum(1,2,3));
-#### 4.7 函数重载
-在Java中的重载，指的是两个或者两个以上的同名函数，参数不一样
-在TypeScript中，表现为给同一个函数提供多个函数类型定义
-let obj: any={};
+print("Jack");
+```
+
+#### 2.5 默认参数
+
+```typescript
+function ajax(url: string, method: string = "GET") {
+  console.log(url, method);
+}
+ajax("/users");
+```
+
+#### 2.6 剩余参数
+
+```typescript
+function sum(...numbers: number[]) {
+  return numbers.reduce((val, item) => (val += item), 0);
+}
+console.log(sum(1, 2, 3));
+```
+
+#### 2.7 函数重载
+
+在 Java 中的重载，指的是两个或者两个以上的同名函数，参数不一样
+在 TypeScript 中，表现为给同一个函数提供多个函数类型定义
+
+同名函数申明重载中间不能有别的语句隔着
+
+```typescript
+let obj: any = {};
 function attr(val: string): void;
 function attr(val: number): void;
-function attr(val:any):void {
-if (typeof val === 'number') {
-obj.age=val;
-} else {
-obj.name=val;
+function attr(val: any): void {
+  // 这里虽然val:any托底，但是实际语法只是上面的重载，超出上面两种类型会报错
+  if (typeof val === "number") {
+    obj.age = val;
+  } else {
+    obj.name = val;
+  }
 }
-}
-attr('zfpx');
+attr("Jack");
 attr(9);
-attr(true);
+attr(true); // 会报错
+// TS2769: No overload matches this call.
+// Overload 1 of 2, '(val: string): void', gave the following error.
+// Argument of type 'boolean' is not assignable to parameter of type 'string'.
+// Overload 2 of 2, '(val: number): void', gave the following error.
+// Argument of type 'boolean' is not assignable to parameter of type 'number'.
+// index.tsx(38, 12): The call would have succeeded against this implementation,
+// but implementation signatures of overloads are not externally visible.
 console.log(obj);
+```
+
+不用重载比较难实现的例子
+
+```typescript
+let obj: any = {};
+function attr(a: string, b: number): void;
+function attr(a: number, b: number): void;
+function attr(a: any, b: any): void {
+  // 这里虽然val:any托底，但是实际语法只是上面的重载，超出上面两种类型会报错
+  if (typeof a === "string" && typeof b === "number") {
+    obj.age = val;
+  } else {
+    obj.name = val;
+  }
+}
+attr("Jack");
+attr(9);
+
+console.log(obj);
+```
+
+### 3. 类
+
+#### 3.1 如何定义类
+
+```typescript
+export {};
+class Person {
+  name: string;
+  getName(): void {
+    console.log(this.name);
+  }
+}
+let p1 = new Person();
+p1.name = "Jack";
+p1.getName();
+```
+
+编译配置 compilerOption.module = commonjs，编译出结果
+
+```javascript
+"use strict";
+exports.__esmodule = true;
+var Person = /** class **/ function () {
+  function Person() {}
+  Person.prototype.getName = function () {
+    console.log(this.name);
+  };
+  return Person;
+};
+var p1 = new Person();
+p1.name = "Jack";
+p1.getName();
+```
+
+#### 3.2 存取器
+
+在 TypeScript 中，我们可以通过存取器来改变一个类中属性的读取和赋值行为
+构造函数
+主要用于初始化类的成员变量属性
+类的对象创建时自动调用执行
+没有返回值
+
+```typescript
+class User {
+  myname: string;
+  constructor(myname: string) {
+    this.myname = myname;
+  }
+  get name() {
+    return this.myname;
+  }
+  set name(value) {
+    this.myname = value;
+  }
+}
+
+let user = new User("Jack");
+user.name = "Rose";
+console.log(user.name);
+```
+
+#### 3.3 参数属性
+
+```typescript
+class User {
+  // myName: string; // 有了public mayname: string 可以省去这两句话
+  constructor(public myname: string) {
+    // this.myName = myName // 有了public mayname: string 可以省去这两句话
+  }
+  get name() {
+    return this.myname;
+  }
+  set name(value) {
+    this.myname = value;
+  }
+}
+
+let user = new User("Jack");
+user.name = "Rose";
+console.log(user.name);
+```
+
+#### 3.4 readonly
+
+readonly 修饰的变量只能在构造函数中初始化
+在 TypeScript 中，const 是常量标志符，其值不能被重新分配
+TypeScript 的类型系统同样也允许将 interface、type、 class 上的属性标识为 readonly
+readonly 实际上只是在编译阶段进行代码检查。而 const 则会在运行时检查（在支持 const 语法的 JavaScript 运行时环境中）
+
+```typescript
+class Animal {
+  public readonly name: string;
+  constructor(name) {
+    this.name = name;
+  }
+  changeName(name: string) {
+    this.name = name; // 这里报错无法修改
+  }
+}
+
+let a = new Animal("Jack");
+a.changeName("Rose");
+```
+
+#### 3.5 继承
+
+子类继承父类后子类的实例就拥有了父类中的属性和方法，可以增强代码的可复用性
+将子类公用的方法抽象出来放在父类中，自己的特殊逻辑放在子类中重写父类的逻辑
+super 可以调用父类上的方法和属性
+
+```typescript
+class Person {
+  name: string; //定义实例的属性，默认省略 public 修饰符
+  age: number;
+  constructor(name: string, age: number) {
+    //构造函数
+    this.name = name;
+    this.age = age;
+  }
+  getName(): string {
+    return this.name;
+  }
+  setName(name: string): void {
+    this.name = name;
+  }
+}
+class Student extends Person {
+  no: number;
+  constructor(name: string, age: number, no: number) {
+    super(name, age);
+    this.no = no;
+  }
+  getNo(): number {
+    return this.no;
+  }
+}
+let s1 = new Student("Jack", 10, 1);
+console.log(s1);
+```
+
+#### 3.6 类里面的修饰符
+
+```typescript
+class Father {
+  public name: string; //类里面 子类 其它任何地方外边都可以访问
+  protected age: number; //类里面 子类 都可以访问,其它任何地方不能访问
+  private money: number; //类里面可以访问， 子类和其它任何地方都不可以访问
+  constructor(name: string, age: number, money: number) {
+    //构造函数
+    this.name = name;
+    this.age = age;
+    this.money = money;
+  }
+  getName(): string {
+    return this.name;
+  }
+  setName(name: string): void {
+    this.name = name;
+  }
+}
+class Child extends Father {
+  constructor(name: string, age: number, money: number) {
+    super(name, age, money);
+  }
+  desc() {
+    console.log(`${this.name} ${this.age} ${this.money}`);
+  }
+}
+
+let child = new Child("Jack", 10, 1000);
+console.log(child.name); // Jack
+console.log(child.age); // undefined
+console.log(child.money); // undefined
+```
+
+#### 3.7 静态属性 静态方法
+
+```typescript
+class Father {
+  static className = "Father";
+  static getClassName() {
+    return Father.className;
+  }
+  public name: string;
+  constructor(name: string) {
+    //构造函数
+    this.name = name;
+  }
+}
+class Child extends Father {
+  constructor(name: string, age: number, money: number) {
+    super(name);
+  }
+  desc() {
+    console.log(`${this.name} ${this.age} ${this.money}`);
+  }
+}
+console.log(Father.className);
+console.log(Child.className); // 静态属性子类可以继承
+console.log(Father.getClassName());
+console.log(Child.getClassName()); // 静态方法子类可以继承
+```
+
+```typescript
+export {}
+class Father {
+  public name: string;
+  constructor(name: string) {
+    //构造函数
+    this.name = name;
+  }
+}
+class Child extends Father {
+  public age: number;
+
+  constructor(name: string, age: number) {
+    super(name);
+    this.age = age
+  }
+  desc() {
+    console.log(`${this.name} ${this.age}`);
+  }
+}
+const c1 = new Child('Jack', 18)
+```
+
+编译配置 compilerOption.module = commonjs，编译出结果
+```javascript
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) { // 拷贝静态属性
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __()); // 逗号语法返回值是最后一句话的值
+    };
+})();
+exports.__esModule = true;
+var Father = /** @class */ (function () {
+    function Father() {
+    }
+    return Father;
+}());
+var Child = /** @class */ (function (_super) {
+    __extends(Child, _super); // 继承静态属性
+    function Child() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return Child;
+}(Father));
+
+```
+
+#### 3.8 抽象类
+
+抽象描述一种抽象的概念，无法被实例化，只能被继承
+无法创建抽象类的实例
+抽象方法不能在抽象类中实现，只能在抽象类的具体子类中实现，而且必须实现
+
+```typescript
+abstract class Animal3 {
+  name: string;
+  abstract speak();
+}
+class Cat extends Animal3 {
+  speak() {
+    console.log("喵喵喵");
+  }
+}
+let cat = new Cat();
+cat.speak();
+```
+
+```typescript
+
+```
+
+```typescript
+
+```
+
+```typescript
+
+```

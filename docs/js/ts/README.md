@@ -80,3 +80,15 @@ type A2 = {age:number}
 type A = A1 & A2
 let b: A = {name:'sansan',age:22}
 ```
+
+
+引入js模块因为没有类型文件而报错，在typings.d.ts加入declare module '模块名'
+
+```typescript
+// typings.d.ts
+declare module 'uuid';
+```
+```typescript
+// uuid 为js包
+import { v4 } from 'uuid';
+```

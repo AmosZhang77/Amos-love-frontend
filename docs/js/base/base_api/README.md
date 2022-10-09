@@ -59,6 +59,29 @@ date.getTime()
 date.setTime() // 单位：毫秒数
 ```
 
+### 计算精度产生小数问题
+0.29*100不会得到29，而是28.99999999
+希望得到正确结果
+
+```javascript
+// 1、toFixed()方法
+// 需注意，保留两位小数，将数值类型的数据改变成了字符串类型
+
+// 1.四舍五入
+var num =2.446242342;
+num = num.toFixed(2);
+console.log(num); //2.45
+console.log(typeof num); // string
+
+// 2、Math.floor()，不四舍五入 ，向下取整
+// 注意，不改变数据类型
+
+// 2.不四舍五入 向下取整
+num = Math.round(num * 100) / 100;
+console.log(num); //2.44
+console.log(typeof num); // number
+```
+
 ### localStorage sessionStorage cookie 对比
 
 |     对比        | localStorage    | sessionStorage  | cookie |

@@ -229,3 +229,108 @@ console.log(
   getIdArr(category, categoryId),
 );
 ```
+
+### headers拿不到完整,拿headers里的文件名
+默认情况下，只有七种 simple response headers（简单响应首部）可以暴露给外部：(浏览器调试界面可以看到全部header，但是js只能获得默认7种)
+
+如果想要让客户端可以访问到其他的首部信息，可以将它们在 Access-Control-Expose-Headers 里面列出来。(后端需要在response的头里面加)
+
+Access-Control-Expose-Headers: <header-name>, <header-name>, ...
+
+见https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Access-Control-Expose-Headers
+
+### blob 下载二进制文件流
+
+```javascript
+// umirequest 中写法,axios中header获取方式不同
+
+// 删除url参数 // 如果是vue，vue route里面有直接可以用的方法
+export const urlDelParameter = (key: string | string[], href: string) => {
+  // const { href } = window.location;
+  const query = qs.parse(href?.split('?')[1]);
+  if (typeof key === 'object' && key?.forEach) {
+    key.forEach((val) => {
+      delete query[val];
+    });
+  } else if (typeof key === 'string') {
+    delete query[key];
+  }
+  return qs.stringify(query);
+};
+/** 响应拦截器 */
+async function responseInterceptor(response: any) {
+  if (response?.status === API_CODES.SUCCESS) {
+    try {
+      const data = await response.clone().json();
+
+      // 4001 token失效
+      if (data?.code === API_Data_CODES.TOKEN_ERROR) {
+
+        window.localStorage.removeItem('token');
+        const res = await refreshTokenUsingPOST({ refreshToken: getRToken() as string });
+        if (res?.data?.token && res?.data?.rtoken) {
+          setToken(res.data.token);
+          setRToken(res.data.rtoken);
+          window.location.reload();
+        }
+      } else if (data?.code === API_Data_CODES.R_TOKEN_ERROR) {
+        // 4002 refresh token失效
+        window.localStorage.removeItem('token');
+        window.localStorage.removeItem('rToken');
+        const formatSearch = urlDelParameter( // 删除url参数
+          ['token', 'rtoken', 'lang', 'type', 'employeeNo'],
+          decodeURIComponent(window.location.href),
+        );
+        // console.log('formatSearch',formatSearch)
+        const loginUrl = `${getPrefixUrl('loginUrl')}//#/c-login?redirect=${encodeURIComponent(
+          `${getPrefixUrl('redirect')}${window.location.pathname}${
+            formatSearch ? `?${formatSearch}` : ''
+          }`,
+        )}`;
+        // console.log('loginUrl',loginUrl)
+
+        window.location.href = loginUrl;
+        // history.push('/user/login');
+      } else {
+        if (data?.code !== API_Data_CODES.SUCCESS) {
+          message.error(data.msg);
+        }
+      }
+      return response;
+    } catch (e) {
+      let fn = async () => {
+        const blobO = await response.blob();
+        if (blobO instanceof Blob) {
+          // 获取excel 导出名称
+          const name =
+            response.headers.get('Content-disposition')?.split('filename=')[1] ?? '下载文件';
+          /** 下载文件-请求后处理函数 */
+          exportFileCallback(blobO, name);
+        }
+        return response;
+      };
+      fn();
+    }
+  } else {
+    message.error('network has some problem');
+    return Promise.reject(response);
+  }
+}
+
+function exportFileCallback(res: any, filename: string) {
+console.log('type', res.type);
+const blob = new Blob([res], { type: res.type });
+// const blob = new Blob([res.Blob], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+
+const a = document.createElement('a');
+const URL = window.URL || window.webkitURL;
+// const herf = window.URL.createObjectURL(res)
+const herf = URL.createObjectURL(blob);
+a.href = herf;
+a.download = filename;
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+window.URL.revokeObjectURL(herf);
+}
+```

@@ -164,3 +164,14 @@ git config --global core.autocrlf input
 // 提交检出均不转换
 
 git config --global core.autocrlf false
+
+
+## git-flow
+
+<img src="./images/gitflow.png" >
+
+- 建议从dev拉feature功能分支，进行开发，完成功能后往dev合，也可直接在dev分支上开发。已发布的功能分支建议超过1，2个月自己清理自己建的功能分支。
+- 需要提测时，将dev分支合到测试用release分支
+- 测试完成需要上线时，将release分支合到master分支，master分支作为发版分支
+- 一般bug修复同一般开发流程
+- 紧急bug热修，从master拉bugfix分支，修完自测后合到master发布，同时也需要合到dev分支

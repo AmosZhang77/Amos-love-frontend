@@ -189,3 +189,13 @@ envItemT.sub[envItemT.subShowIndex].content = needContent // 如果表格是执�
 ```js
 pickBy(object, it => !(it == null))
 ```
+
+### Object.create原理
+```javascript
+function create (prototype){
+  function Temp(){}
+  let temp = new Temp()
+  temp.prototype = prototype
+  return temp
+}
+```

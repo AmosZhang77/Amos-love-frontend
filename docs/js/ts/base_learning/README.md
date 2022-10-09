@@ -2,8 +2,9 @@
 
 安装，编译
 ```shell
-cnpm i typescript -g
-tsc helloworld.ts
+npm i typescript -g
+// tsc helloworld.ts // 这样不会就近找配置文件
+tsc
 ```
 
 tsconfig.json 文件，ts 配置文件
@@ -133,8 +134,8 @@ enum Gender {
   BOY,
 }
 
-console.log(`李雷是${Gender.BOY}`);
-console.log(`韩梅梅是${Gender.GIRL}`);
+console.log(`Jack${Gender.BOY}`);
+console.log(`Rose${Gender.GIRL}`);
 
 enum Week {
   MONDAY = 1,
@@ -150,7 +151,7 @@ console.log(`今天是星期${Week.MONDAY}`);
 
 假如包含了计算成员，则会在编译阶段报错
 
-枚举常量不会编译出函数，而是常量，提高性能
+枚举常量不会编译出函数，而是常量，提高性能。如果只是申明未使用将编译出空，使用部分只编译出部分。
 
 ```typescript
 const enum Colors {
@@ -326,6 +327,15 @@ username2 = "cat";
 username2 = null;
 ```
 
+noImplicitAny
+禁止隐式申明any
+
+```typescript
+let a
+console.log(a.b) // 不会隐私申明为any，ts报错，获取b属性可能会获取不到
+```
+
+
 #### 1.12 包装对象（Wrapper Object）
 
 JavaScript 的类型分为两种：原始数据类型（Primitive data types）和对象类型（Object types）。
@@ -349,6 +359,13 @@ console.log(new String("cat").toUpperCase());
 let isOK1: boolean = true; // 编译通过
 let isOK2: boolean = Boolean(1); // 编译通过
 let isOK3: boolean = new Boolean(1); // 编译失败   期望的 isOK 是一个原始数据类型
+```
+
+```typescript
+let name1: string = "cat";
+console.log(name1.toUpperCase());
+let name2: string = new String("cat"); // ts报错
+console.log(name2.toUpperCase());
 ```
 
 #### 1.13 联合类型
@@ -422,7 +439,7 @@ let getUsername: GetUsernameFunction = function (firstName, lastName) {
 let hello2 = function (name: string): void {
   console.log("hello2", name);
 };
-hello2("zfpx");
+hello2("Jack");
 ```
 
 #### 2.4 可选参数
@@ -486,32 +503,92 @@ attr(true); // 会报错
 console.log(obj);
 ```
 
+用以下泛型方法，可以实现a 和b是活的类型，但是总是相同，不是交叉的效果。如果想要，ab类型总是交叉不同呢（a是string，b必须是number，反之亦然）
+
+```typescript
+let obj: any = {};
+type Person = string | number;
+function attr<T extends Person> (a:T,b:T): void {
+  // 这里虽然val:any托底，但是实际语法只是上面的重载，超出上面两种类型会报错
+  if (typeof a === "string" && typeof b === "number") {
+  obj.age = a;
+} else {
+  obj.name = b;
+}
+}
+attr("Jack", "Rose"); // 想要报错，但不报错
+
+attr(9, 7); // 想要报错，但不报错
+
+attr("Jack", 9); // 想要不报错,但报错
+```
+
+下面用了联合类型，还差一点，没有实现需求
+```typescript
+let obj: any = {};
+function attr(a: string | number, b: string | number): void {
+  // 这里虽然val:any托底，但是实际语法只是上面的重载，超出上面两种类型会报错
+  if (typeof a === "string" && typeof b === "number") {
+    obj.age = a;
+  } else {
+    obj.name = b;
+  }
+}
+attr("Jack", "Rose"); // 想要报错，但不报错
+
+attr(9, 7); // 想要报错，但不报错
+
+attr("Jack", 9); // 不报错
+```
+
 不用重载比较难实现的例子
 
 ```typescript
 let obj: any = {};
 function attr(a: string, b: number): void;
-function attr(a: number, b: number): void;
+function attr(a: number, b: string): void;
 function attr(a: any, b: any): void {
   // 这里虽然val:any托底，但是实际语法只是上面的重载，超出上面两种类型会报错
   if (typeof a === "string" && typeof b === "number") {
-    obj.age = val;
+    obj.age = a;
   } else {
-    obj.name = val;
+    obj.name = b;
   }
 }
-attr("Jack");
-attr(9);
+attr("Jack","Rose"); // 报错
+
+attr(9,7); // 报错
+
+attr("Jack",9); // 不报错
 
 console.log(obj);
 ```
+
+但是，其实这个需求不用函数重载，用元组加联合类型也能实现
+
+```typescript
+let obj: any = {};
+function attr(...props: [a: string, b: number] | [a: number, b: string]): void {
+  if (typeof props[0] === "string" && typeof props[1] === "number") {
+    obj.age = props[0];
+  } else {
+    obj.name = props[1];
+  }
+}
+attr("Jack", "Rose"); // 报错
+
+attr(9, 7); // 报错
+
+attr("Jack", 9); // 不报错
+```
+
 
 ### 3. 类
 
 #### 3.1 如何定义类
 
 ```typescript
-export {};
+export {}; // 如果文件中有export会认为是模块，否则下面申明的Person会是全局变量
 class Person {
   name: string;
   getName(): void {
@@ -736,18 +813,18 @@ const c1 = new Child('Jack', 18)
 ```javascript
 "use strict";
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) { // 拷贝静态属性
+    var extendStatics = function (c, b) { // 拷贝静态属性
         extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
+            ({ __proto__: [] } instanceof Array && function (c, b) { c.__proto__ = b; }) ||
+            function (c, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) c[p] = b[p]; };
+        return extendStatics(c, b);
     };
-    return function (d, b) {
+    return function (c, b) {
         if (typeof b !== "function" && b !== null)
             throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __()); // 逗号语法返回值是最后一句话的值
+        extendStatics(c, b);
+        function __() { this.constructor = c; }
+        c.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __()); // 逗号语法返回值是最后一句话的值
     };
 })();
 exports.__esModule = true;
@@ -773,8 +850,11 @@ var Child = /** @class */ (function (_super) {
 抽象方法不能在抽象类中实现，只能在抽象类的具体子类中实现，而且必须实现
 
 ```typescript
+// 抽象类
 abstract class Animal3 {
   name: string;
+  
+  // 抽象方法
   abstract speak();
 }
 class Cat extends Animal3 {
@@ -787,13 +867,73 @@ cat.speak();
 ```
 
 ```typescript
-
+type O = {
+  name: string;
+}
+interface E extends O { // 扩展接口
+  age: numbeer
+}
+const a: E = {
+  name:'Jack',
+  age: 18,
+}
 ```
 
 ```typescript
-
+// 必须包含name,其他类型随意都可以
+interface T {
+  name: string;
+  [key: string]: any // 其他类型随意都可以，这里的key 可以不写做key，比如key1，xxx
+}
 ```
 
 ```typescript
+let a: number = 1
+a as any as string = 'a' // 不合理的断言会报错，双重断言可以解决
+```
+
+### 
+```typescript
+
+// 别名 声明一个类型
+type Sum = ((aa: number, bb: number) => number) | string
+
+// 接口 定义函数是冒号隔开函数返回值，不是箭头
+interface Sum {
+    (a: number, b: number):number
+}
+interface Sum {
+  (a: number, b: number):number | string // 这样写法是错误的，赋值string会报错，接口无法写又是函数又是string，别名可以用联合类型
+}
+// 区别 interface 可以继承  可以被类来实现
+// type仅仅是一个别名 一般在定义联合类型 ，定义临时变量时可以使用
+let sum2: Sum = (a: number, b: number): number => a + b
+
 
 ```
+
+
+```typescript
+
+// <T> 申明泛型T
+// 泛型 , 用来在代码执行时传入的类型，来确定结果
+function createArray<T>(len: number, value: T): T[] {
+    let result = [];
+    for (let i = 0; i < len; i++) {
+        result.push(value);
+    }
+    return result
+}
+let arr = createArray(3, 'HELLO');
+
+// 多个泛型  元组的交换 [boolean,number] = [number,boolean]
+const swap = <T, K>(tuple: [T, K]): [K, T] => {
+    return [tuple[1], tuple[0]]
+}
+swap<number, number>([1, 2]) // 不报错
+swap<string, number>(['string', 2]) // 不报错
+swap([1, 2]) // 不报错，灵活的泛型，根据使用时的类型推断函数内的类型
+export { }
+```
+
+
